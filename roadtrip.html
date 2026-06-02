@@ -7,29 +7,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --surface2: #1e1e1e;
-    --border: #2a2a2a;
-    --accent: #e8421a;
-    --accent2: #f5a623;
-    --text: #f0ede8;
-    --muted: #888;
-    --green: #2ecc71;
-    --blue: #3498db;
+    --bg: #0a0a0a; --surface: #141414; --surface2: #1e1e1e;
+    --border: #2a2a2a; --accent: #e8421a; --accent2: #f5a623;
+    --text: #f0ede8; --muted: #888; --green: #2ecc71; --blue: #3498db;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
 
   header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 16px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 56px; }
   .logo { font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 2px; color: var(--accent); }
   .logo span { color: var(--text); }
-  .trip-badge { background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* AUTH */
+  .auth-btn { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; cursor: pointer; font-size: 12px; color: var(--text); font-family: 'DM Sans', sans-serif; }
+  .auth-btn:hover { border-color: var(--accent); }
+  .auth-avatar { width: 24px; height: 24px; border-radius: 50%; }
+  .auth-name { max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sync-indicator { font-size: 10px; color: var(--green); margin-left: 4px; }
+  .sync-indicator.saving { color: var(--accent2); }
 
   .tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 16px; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
-  .tab { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; letter-spacing: 0.5px; }
+  .tab { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
   .tab:hover:not(.active) { color: var(--text); }
 
@@ -46,18 +45,18 @@
   .stat-num { font-family: 'Bebas Neue', cursive; font-size: 28px; color: var(--accent); line-height: 1; }
   .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
+  /* CHECKLIST */
   .checklist-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-  .checklist-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
-  .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; position: relative; transition: background 0.15s; border-radius: 6px; user-select: none; }
+  .checklist-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); position: relative; border-radius: 6px; user-select: none; }
   .check-item:last-child { border-bottom: none; }
   .check-item.dragging { opacity: 0.4; background: var(--surface2); }
   .check-item.drag-over { border-top: 2px solid var(--accent); }
-  .drag-handle { color: var(--muted); font-size: 14px; cursor: grab; padding: 0 2px; flex-shrink: 0; touch-action: none; }
-  .drag-handle:active { cursor: grabbing; }
-  .check-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 11px; }
+  .drag-handle { color: var(--muted); font-size: 14px; cursor: grab; padding: 0 2px; flex-shrink: 0; }
+  .check-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 11px; cursor: pointer; }
   .check-item.checked .check-box { background: var(--green); border-color: var(--green); }
   .check-item.checked .check-text { text-decoration: line-through; color: var(--muted); }
-  .check-text { font-size: 14px; flex: 1; }
+  .check-text { font-size: 14px; flex: 1; cursor: pointer; }
   .check-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
   .badge-done { background: rgba(46,204,113,0.15); color: var(--green); }
   .badge-todo { background: rgba(232,66,26,0.15); color: var(--accent); }
@@ -69,9 +68,14 @@
   .add-item-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; }
   .add-item-input:focus { border-color: var(--accent); }
   .add-item-input::placeholder { color: var(--muted); }
-  .badge-select { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; color: var(--text); font-size: 12px; font-family: 'DM Sans', sans-serif; outline: none; cursor: pointer; }
+  .badge-select { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
   .add-btn { background: var(--accent); border: none; border-radius: 8px; color: white; font-size: 20px; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .add-btn:hover { background: #c93615; }
+
+  /* LOGIN PROMPT */
+  .login-prompt { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 12px; }
+  .login-prompt-icon { font-size: 36px; margin-bottom: 12px; }
+  .login-prompt-text { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+  .login-prompt-btn { background: white; color: #333; border: none; border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 
   .maps-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--blue); text-decoration: none; margin-top: 6px; padding: 3px 8px; background: rgba(52,152,219,0.1); border-radius: 6px; font-weight: 500; }
   .maps-link:hover { background: rgba(52,152,219,0.2); }
@@ -98,30 +102,16 @@
   .day-card.open .day-arrow { transform: rotate(180deg); }
   .day-stops { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
   .day-card.open .day-stops { display: block; }
-
   .stop { display: flex; gap: 12px; padding: 12px 0; position: relative; }
   .stop:not(:last-child)::after { content: ''; position: absolute; left: 15px; top: 40px; bottom: -12px; width: 2px; background: var(--border); }
   .stop-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; z-index: 1; }
-  .icon-hotel { background: rgba(52,152,219,0.2); }
-  .icon-food { background: rgba(232,66,26,0.2); }
-  .icon-music { background: rgba(155,89,182,0.2); }
-  .icon-car { background: rgba(46,204,113,0.2); }
-  .icon-sight { background: rgba(245,166,35,0.2); }
-  .icon-shop { background: rgba(52,152,219,0.2); }
-  .icon-plane { background: rgba(232,66,26,0.2); }
+  .icon-hotel { background: rgba(52,152,219,0.2); } .icon-food { background: rgba(232,66,26,0.2); } .icon-music { background: rgba(155,89,182,0.2); } .icon-car { background: rgba(46,204,113,0.2); } .icon-sight { background: rgba(245,166,35,0.2); } .icon-shop { background: rgba(52,152,219,0.2); } .icon-plane { background: rgba(232,66,26,0.2); }
   .stop-body { flex: 1; }
   .stop-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 2px; }
   .stop-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
   .stop-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
   .stop-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 8px; margin-top: 6px; font-weight: 600; }
-  .tag-bbq { background: rgba(232,66,26,0.15); color: var(--accent); }
-  .tag-jazz { background: rgba(155,89,182,0.15); color: #9b59b6; }
-  .tag-vinyl { background: rgba(52,152,219,0.15); color: var(--blue); }
-  .tag-hotel { background: rgba(52,152,219,0.15); color: var(--blue); }
-  .tag-scenic { background: rgba(46,204,113,0.15); color: var(--green); }
-  .tag-hot { background: rgba(232,66,26,0.15); color: var(--accent); }
-  .tag-museum { background: rgba(245,166,35,0.15); color: var(--accent2); }
-  .tag-aberto { background: rgba(245,166,35,0.15); color: var(--accent2); }
+  .tag-bbq { background: rgba(232,66,26,0.15); color: var(--accent); } .tag-jazz { background: rgba(155,89,182,0.15); color: #9b59b6; } .tag-vinyl { background: rgba(52,152,219,0.15); color: var(--blue); } .tag-hotel { background: rgba(52,152,219,0.15); color: var(--blue); } .tag-scenic { background: rgba(46,204,113,0.15); color: var(--green); } .tag-hot { background: rgba(232,66,26,0.15); color: var(--accent); } .tag-museum { background: rgba(245,166,35,0.15); color: var(--accent2); } .tag-aberto { background: rgba(245,166,35,0.15); color: var(--accent2); }
 
   .hotels-list { margin-bottom: 8px; }
   .hotel-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
@@ -144,62 +134,19 @@
   .info-row:last-child { border-bottom: none; }
   .info-row-label { color: var(--muted); }
   .info-row-value { font-weight: 500; font-family: 'DM Mono', monospace; font-size: 12px; }
-
   .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 20px 0 10px; }
 
-  /* DOCUMENTS */
-  .docs-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  .docs-upload-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-  }
-  .docs-refresh-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .docs-refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-  .doc-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s;
-  }
+  /* DOCS */
+  .docs-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .docs-upload-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: white; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+  .docs-refresh-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .doc-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); transition: border-color 0.2s; }
   .doc-item:hover { border-color: var(--accent); }
   .doc-icon { font-size: 28px; flex-shrink: 0; }
   .doc-info { flex: 1; min-width: 0; }
   .doc-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .doc-meta { font-size: 11px; color: var(--muted); }
   .doc-open { font-size: 18px; color: var(--muted); flex-shrink: 0; }
-
   .docs-loading { text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
   .docs-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
   .docs-empty-icon { font-size: 48px; margin-bottom: 12px; }
@@ -214,7 +161,9 @@
 
 <header>
   <div class="logo">ROAD<span>TRIP</span> 26</div>
-  <div class="trip-badge">Lisboa → Miami → Lisboa</div>
+  <button class="auth-btn" id="auth-btn" onclick="handleAuth()">
+    <span id="auth-label">🔐 Login</span>
+  </button>
 </header>
 
 <div class="tabs">
@@ -224,7 +173,7 @@
   <div class="tab" onclick="showSection('regresso')">🔄 Regresso</div>
   <div class="tab" onclick="showSection('hoteis')">🏨 Hotéis</div>
   <div class="tab" onclick="showSection('voo')">✈️ Voos</div>
-  <div class="tab" onclick="showSection('docs')" id="tab-docs">📄 Docs</div>
+  <div class="tab" onclick="showSection('docs')">📄 Docs</div>
   <div class="tab" onclick="showSection('dicas')">💡 Dicas</div>
 </div>
 
@@ -258,41 +207,58 @@
 
 <!-- CHECKLIST -->
 <div class="content section" id="checklist">
-  <div class="section-label">Antes de partir</div>
-  <div class="checklist-card">
-    <div class="checklist-title">✅ Já tratado</div>
-    <div id="list-done" class="check-list">
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Voo UA943 Lisboa → Washington (24 Jun)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Voo regresso Washington → Lisboa (4 Jul 22h30)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Hertz Gold — Mercedes GLE (Medium Elite SUV)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">GLo Hotel — Asheville</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Aloft Savannah Downtown Historic District</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Treehouse Hotel — Miami (26 Jun → 30 Jun)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Villa 1565 — Saint Augustine</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Econo Lodge & Suites — Southern Pines</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Courtyard by Marriott — Dulles Airport</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Bilhete Portugal vs Colômbia (27 Jun, Hard Rock Stadium)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">eSIM Visible (Verizon) — 14 dias, unlimited</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">App Mobile Passport Control (MPC) instalada</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-    </div>
-    <div class="add-item-form">
-      <input class="add-item-input" type="text" placeholder="Adicionar item..." id="input-done" onkeydown="if(event.key==='Enter')addItem('list-done','input-done','badge-done-sel')">
-      <select class="badge-select" id="badge-done-sel"><option value="badge-done">feito</option><option value="badge-todo">urgente</option><option value="badge-pending">pendente</option></select>
-      <button class="add-btn" onclick="addItem('list-done','input-done','badge-done-sel')">+</button>
+  <div id="checklist-login-prompt" style="display:none">
+    <div class="login-prompt">
+      <div class="login-prompt-icon">🔐</div>
+      <div class="login-prompt-text">Faz login para guardar a checklist na cloud e aceder em qualquer dispositivo.</div>
+      <button class="login-prompt-btn" onclick="handleAuth()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Entrar com Google
+      </button>
     </div>
   </div>
-  <div class="checklist-card">
-    <div class="checklist-title">📋 Por fazer</div>
-    <div id="list-todo" class="check-list">
-      <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Verificar ESTA válido</div><span class="check-badge badge-todo">urgente</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Reservar timed-entry Air & Space Museum</div><span class="check-badge badge-todo">importante</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Ativar eSIM Visible ao aterrar em Dulles</div><span class="check-badge badge-pending">dia 24</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
-      <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Submeter MPC ao aterrar (Terminal 2, Gate C8)</div><span class="check-badge badge-pending">dia 24</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+
+  <div id="checklist-content">
+    <div class="section-label" style="display:flex;justify-content:space-between;align-items:center">
+      <span>Antes de partir</span>
+      <span id="sync-status" style="font-size:11px;color:var(--muted)"></span>
     </div>
-    <div class="add-item-form">
-      <input class="add-item-input" type="text" placeholder="Adicionar item..." id="input-todo" onkeydown="if(event.key==='Enter')addItem('list-todo','input-todo','badge-todo-sel')">
-      <select class="badge-select" id="badge-todo-sel"><option value="badge-todo">urgente</option><option value="badge-pending">pendente</option><option value="badge-done">feito</option></select>
-      <button class="add-btn" onclick="addItem('list-todo','input-todo','badge-todo-sel')">+</button>
+
+    <div class="checklist-card">
+      <div class="checklist-title">✅ Já tratado</div>
+      <div id="list-done" class="check-list">
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Voo UA943 Lisboa → Washington (24 Jun)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Voo regresso Washington → Lisboa (4 Jul 22h30)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Hertz Gold — Mercedes GLE (Medium Elite SUV)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">GLo Hotel — Asheville</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Aloft Savannah Downtown Historic District</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Treehouse Hotel — Miami (26 Jun → 30 Jun)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Villa 1565 — Saint Augustine</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Econo Lodge & Suites — Southern Pines</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Courtyard by Marriott — Dulles Airport</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">Bilhete Portugal vs Colômbia (27 Jun, Hard Rock Stadium)</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">eSIM Visible (Verizon) — 14 dias, unlimited</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item checked" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">✓</div><div class="check-text" onclick="toggleCheck(this.parentElement)">App Mobile Passport Control (MPC) instalada</div><span class="check-badge badge-done">feito</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+      </div>
+      <div class="add-item-form">
+        <input class="add-item-input" type="text" placeholder="Adicionar item..." id="input-done" onkeydown="if(event.key==='Enter')addItem('list-done','input-done','badge-done-sel')">
+        <select class="badge-select" id="badge-done-sel"><option value="badge-done">feito</option><option value="badge-todo">urgente</option><option value="badge-pending">pendente</option></select>
+        <button class="add-btn" onclick="addItem('list-done','input-done','badge-done-sel')">+</button>
+      </div>
+    </div>
+
+    <div class="checklist-card">
+      <div class="checklist-title">📋 Por fazer</div>
+      <div id="list-todo" class="check-list">
+        <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Verificar ESTA válido</div><span class="check-badge badge-todo">urgente</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Reservar timed-entry Air & Space Museum</div><span class="check-badge badge-todo">importante</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Ativar eSIM Visible ao aterrar em Dulles</div><span class="check-badge badge-pending">dia 24</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+        <div class="check-item" draggable="true"><span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)"></div><div class="check-text" onclick="toggleCheck(this.parentElement)">Submeter MPC ao aterrar (Terminal 2, Gate C8)</div><span class="check-badge badge-pending">dia 24</span><button class="delete-btn" onclick="deleteItem(this)">✕</button></div>
+      </div>
+      <div class="add-item-form">
+        <input class="add-item-input" type="text" placeholder="Adicionar item..." id="input-todo" onkeydown="if(event.key==='Enter')addItem('list-todo','input-todo','badge-todo-sel')">
+        <select class="badge-select" id="badge-todo-sel"><option value="badge-todo">urgente</option><option value="badge-pending">pendente</option><option value="badge-done">feito</option></select>
+        <button class="add-btn" onclick="addItem('list-todo','input-todo','badge-todo-sel')">+</button>
+      </div>
     </div>
   </div>
 </div>
@@ -310,28 +276,28 @@
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">02</div><div class="day-info"><div class="day-date">Quarta, 25 Junho</div><div class="day-route">Asheville → Savannah</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏔️</div><div class="stop-body"><div class="stop-time">9h00 — 10h30</div><div class="stop-name">Blue Ridge Parkway — Craggy Gardens</div><a class="maps-link" href="https://maps.google.com/?cid=4797346618900825965" target="_blank">📍 Google Maps</a><div class="stop-note">Troço cónico para norte. Miradouros espetaculares em junho. Meia-volta e desce para I-26 Este.</div><span class="stop-tag tag-scenic">Paisagem</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🌶️</div><div class="stop-body"><div class="stop-time">~13h00</div><div class="stop-name">PuckerButt Pepper Co — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=2874347944587106438" target="_blank">📍 Google Maps</a><div class="stop-note">Casa do Carolina Reaper! Provar tudo de graça. Abre 11h-18h (sex/sab até 19h).<br>1376 Broadcloth St Suite 102</div><span class="stop-tag tag-hot">🔥 Chili Head</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~14h30</div><div class="stop-name">Blue Bar & Smokehouse — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=7120205965848807323" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do PuckerButt. Ribs, brisket, smoked wings. Abre 11h. ⭐ 4.5<br>1500 Fort Mill Pkwy #111</div><span class="stop-tag tag-bbq">BBQ</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~19h30 — se der</div><div class="stop-name">Rody's Records — Savannah, GA</div><a class="maps-link" href="https://maps.google.com/?cid=14266658907859923401" target="_blank">📍 Google Maps</a><div class="stop-note">Plano B — só se chegares antes das 19h. Vinil usado A-Z. ⭐ 4.6<br>1401 Habersham St</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🏔️</div><div class="stop-body"><div class="stop-time">9h00 — 10h30</div><div class="stop-name">Blue Ridge Parkway — Craggy Gardens</div><a class="maps-link" href="https://maps.google.com/?cid=4797346618900825965" target="_blank">📍 Google Maps</a><div class="stop-note">Troço cónico para norte. Miradouros espetaculares em junho.</div><span class="stop-tag tag-scenic">Paisagem</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🌶️</div><div class="stop-body"><div class="stop-time">~13h00</div><div class="stop-name">PuckerButt Pepper Co — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=2874347944587106438" target="_blank">📍 Google Maps</a><div class="stop-note">Casa do Carolina Reaper! Provar tudo de graça. Abre 11h-18h.</div><span class="stop-tag tag-hot">🔥 Chili Head</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~14h30</div><div class="stop-name">Blue Bar & Smokehouse — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=7120205965848807323" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do PuckerButt. Ribs, brisket, smoked wings. ⭐ 4.5</div><span class="stop-tag tag-bbq">BBQ</span></div></div>
+      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~19h30 — se der</div><div class="stop-name">Rody's Records — Savannah, GA</div><a class="maps-link" href="https://maps.google.com/?cid=14266658907859923401" target="_blank">📍 Google Maps</a><div class="stop-note">Plano B — só se chegares antes das 19h. ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
       <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Aloft Savannah Downtown</div><a class="maps-link" href="https://maps.google.com/?q=512+W+Oglethorpe+Ave+Savannah+GA" target="_blank">📍 Google Maps</a><div class="stop-note">512 W Oglethorpe Ave · Check-in e deixar as malas</div><span class="stop-tag tag-hotel">Hotel noite 2</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. Pedes ao balcão. ⭐ 4.5<br>116 E Broughton St</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Jazz'd Tapas Bar</div><a class="maps-link" href="https://maps.google.com/?cid=10116845647888913240" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo às quintas. Abre às 16h. ⭐ 4.6<br>52 Barnard St</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. ⭐ 4.5 · 116 E Broughton St</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
+      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Jazz'd Tapas Bar</div><a class="maps-link" href="https://maps.google.com/?cid=10116845647888913240" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo às quintas. Abre às 16h. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">03</div><div class="day-info"><div class="day-date">Quinta, 26 Junho</div><div class="day-route">Savannah → Miami</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~12h30</div><div class="stop-name">The Bearded Pig (ou Butt Hutt) — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=7854807827091398398" target="_blank">📍 Bearded Pig</a> <a class="maps-link" href="https://maps.google.com/?q=Butt+Hutt+Smokehouse+Jacksonville+FL" target="_blank">📍 Butt Hutt</a><div class="stop-note">Bearded Pig: 1808 Kings Ave · ⭐ 4.6<br>Butt Hutt: 3210 Roosevelt Blvd · ⭐ 4.7<br>Ambos abrem às 11h. Decides no dia!</div><span class="stop-tag tag-bbq">BBQ Almoço</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Tiger Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=11044747376207017387" target="_blank">📍 Google Maps</a><div class="stop-note">Vinil curado de qualidade. Abre até 20h. ⭐ 4.8<br>875 Stockton St</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h50</div><div class="stop-name">Yesterday & Today Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=18184179004031297593" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do Tiger. Dig clássico, preços ótimos. Fecha 18h (fecha segundas).<br>⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~12h30</div><div class="stop-name">The Bearded Pig (ou Butt Hutt) — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=7854807827091398398" target="_blank">📍 Bearded Pig</a> <a class="maps-link" href="https://maps.google.com/?q=Butt+Hutt+Smokehouse+Jacksonville+FL" target="_blank">📍 Butt Hutt</a><div class="stop-note">Bearded Pig ⭐ 4.6 · Butt Hutt ⭐ 4.7 · Decides no dia!</div><span class="stop-tag tag-bbq">BBQ Almoço</span></div></div>
+      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Tiger Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=11044747376207017387" target="_blank">📍 Google Maps</a><div class="stop-note">Vinil curado de qualidade. Abre até 20h. ⭐ 4.8</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
+      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h50</div><div class="stop-name">Yesterday & Today Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=18184179004031297593" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do Tiger. Fecha 18h (fecha segundas). ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
       <div class="stop"><div class="stop-icon icon-hotel">🌴</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Treehouse Hotel — Miami</div><a class="maps-link" href="https://maps.google.com/?cid=6912079015637896163" target="_blank">📍 Google Maps</a><div class="stop-note">7126 Biscayne Blvd · Amanhã é dia de jogo! 🇵🇹⚽</div><span class="stop-tag tag-hotel">Miami até 30 Jun</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">⚽</div><div class="day-info"><div class="day-date">Sexta, 27 Junho</div><div class="day-route">Jogo Portugal vs Colômbia</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴<br>Autocarros gratuitos com bilhete nos dias de jogo.<br>~30 min do Treehouse Hotel.</div><span class="stop-tag tag-hot">FIFA WC 2026 🔥</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴 · Autocarros gratuitos com bilhete.</div><span class="stop-tag tag-hot">FIFA WC 2026 🔥</span></div></div>
     </div>
   </div>
 </div>
@@ -342,46 +308,46 @@
     <div class="day-header"><div class="day-num">R1</div><div class="day-info"><div class="day-date">Segunda, 30 Junho</div><div class="day-route">Miami → Saint Augustine</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
       <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~11h00</div><div class="stop-name">Saída Miami — Treehouse Hotel</div><div class="stop-note">Hora a confirmar conforme despedida do grupo. I-95 Norte direto.</div></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">Caminho — em aberto</div><div class="stop-name">Paragem BBQ no caminho</div><div class="stop-note">Opções em Delray Beach/Fort Lauderdale/Boca Raton.<br>• Tropical Smokehouse Delray ⭐ 4.8<br>• Smoke BBQ Fort Lauderdale ⭐ 4.5<br>• Mississippi Sweets Boca Raton ⭐ 4.5</div><span class="stop-tag tag-aberto">Em aberto</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~17h30</div><div class="stop-name">Villa 1565 — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=3365190361966199704" target="_blank">📍 Google Maps</a><div class="stop-note">137 San Marco Ave · 2 piscinas · Pequeno-almoço buffet · Árvore 650 anos!</div><span class="stop-tag tag-hotel">Hotel noite R1</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🚶</div><div class="stop-body"><div class="stop-time">~18h30</div><div class="stop-name">Centro Histórico de Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?q=St+George+Street+Saint+Augustine+FL+32084" target="_blank">📍 Google Maps</a><div class="stop-note">A cidade mais antiga dos EUA (1565). Castillo de San Marcos, St. George Street. Tudo a pé do hotel.</div><span class="stop-tag tag-scenic">Historic District</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~20h00</div><div class="stop-name">Brisky's BBQ — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=7230512102769115016" target="_blank">📍 Google Maps</a><div class="stop-note">Datil Brisket Bowl — especialidade local! ⭐ 4.8<br>3009 N Ponce De Leon Blvd · Fecha às 19h (chegar cedo!)</div><span class="stop-tag tag-bbq">BBQ Local</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. Humidor, craft beer. Centro histórico. Abre 14h todos os dias. ⭐ 4.6<br>36 Charlotte St</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">Caminho — em aberto</div><div class="stop-name">Paragem BBQ no caminho</div><div class="stop-note">• Tropical Smokehouse Delray ⭐ 4.8<br>• Smoke BBQ Fort Lauderdale ⭐ 4.5<br>• Mississippi Sweets Boca Raton ⭐ 4.5</div><span class="stop-tag tag-aberto">Em aberto</span></div></div>
+      <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~17h30</div><div class="stop-name">Villa 1565 — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=3365190361966199704" target="_blank">📍 Google Maps</a><div class="stop-note">137 San Marco Ave · 2 piscinas · Buffet incluído · Árvore 650 anos!</div><span class="stop-tag tag-hotel">Hotel noite R1</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🚶</div><div class="stop-body"><div class="stop-time">~18h30</div><div class="stop-name">Centro Histórico de Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?q=St+George+Street+Saint+Augustine+FL+32084" target="_blank">📍 Google Maps</a><div class="stop-note">A cidade mais antiga dos EUA (1565). Tudo a pé do hotel.</div><span class="stop-tag tag-scenic">Historic District</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~20h00</div><div class="stop-name">Brisky's BBQ — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=7230512102769115016" target="_blank">📍 Google Maps</a><div class="stop-note">Datil Brisket Bowl — especialidade local! ⭐ 4.8 · Fecha às 19h!</div><span class="stop-tag tag-bbq">BBQ Local</span></div></div>
+      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. Humidor, craft beer. ⭐ 4.6 · 36 Charlotte St</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">R2</div><div class="day-info"><div class="day-date">Terça, 1 Julho</div><div class="day-route">Saint Augustine → Southern Pines</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏊</div><div class="stop-body"><div class="stop-time">Manhã</div><div class="stop-name">Piscina + Pequeno-almoço — Villa 1565</div><div class="stop-note">Aproveita a manhã! 2 piscinas e buffet incluído. Check-out ~10h30.</div></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍗</div><div class="stop-body"><div class="stop-time">~13h30</div><div class="stop-name">Mrs. Wilkes' Dining Room — Savannah</div><a class="maps-link" href="https://maps.google.com/?cid=13458310307102477254" target="_blank">📍 Google Maps</a><div class="stop-note">O almoço mais autêntico do Sul! Mesas comunitárias, fried chicken lendário. Abre 11h-14h, SEG-SEX apenas. CHEGA CEDO! ⭐ 4.8<br>107 W Jones St</div><span class="stop-tag tag-bbq">Southern Food 🔥</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🌲</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Econo Lodge & Suites — Southern Pines</div><a class="maps-link" href="https://maps.google.com/?cid=17401510954950662698" target="_blank">📍 Google Maps</a><div class="stop-note">408 W Morganton Rd · Pequeno-almoço incluído. Noite de descanso.</div><span class="stop-tag tag-hotel">Hotel noite R2</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🏊</div><div class="stop-body"><div class="stop-time">Manhã</div><div class="stop-name">Piscina + Pequeno-almoço — Villa 1565</div><div class="stop-note">2 piscinas e buffet incluído. Check-out ~10h30.</div></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍗</div><div class="stop-body"><div class="stop-time">~13h30</div><div class="stop-name">Mrs. Wilkes' Dining Room — Savannah</div><a class="maps-link" href="https://maps.google.com/?cid=13458310307102477254" target="_blank">📍 Google Maps</a><div class="stop-note">Mesas comunitárias, fried chicken lendário. Abre 11h-14h SEG-SEX. CHEGA CEDO! ⭐ 4.8</div><span class="stop-tag tag-bbq">Southern Food 🔥</span></div></div>
+      <div class="stop"><div class="stop-icon icon-hotel">🌲</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Econo Lodge & Suites — Southern Pines</div><a class="maps-link" href="https://maps.google.com/?cid=17401510954950662698" target="_blank">📍 Google Maps</a><div class="stop-note">408 W Morganton Rd · Pequeno-almoço incluído.</div><span class="stop-tag tag-hotel">Hotel noite R2</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">R3</div><div class="day-info"><div class="day-date">Quarta, 2 Julho</div><div class="day-route">Southern Pines → Washington</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~11h30 — Richmond</div><div class="stop-name">Almoço em Richmond, VA</div><a class="maps-link" href="https://maps.google.com/?cid=14167451885031456101" target="_blank">📍 ZZQ BBQ</a> <a class="maps-link" href="https://maps.google.com/?q=Mama+J%27s+Richmond+VA" target="_blank">📍 Mama J's</a> <a class="maps-link" href="https://maps.google.com/?q=New+York+Deli+2920+W+Cary+St+Richmond+VA" target="_blank">📍 NY Deli</a><div class="stop-note">• ZZQ Texas Craft BBQ ⭐ 4.7<br>• Buz and Ned's Real BBQ ⭐ 4.3<br>• Mama J's — Southern comfort<br>• Urban Farmhouse — Pimento Grilled Cheese<br>• New York Deli — Sailor Sandwich desde 1929</div><span class="stop-tag tag-aberto">5 opções</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~11h30 — Richmond</div><div class="stop-name">Almoço em Richmond, VA</div><a class="maps-link" href="https://maps.google.com/?cid=14167451885031456101" target="_blank">📍 ZZQ BBQ</a> <a class="maps-link" href="https://maps.google.com/?q=Mama+J%27s+Richmond+VA" target="_blank">📍 Mama J's</a> <a class="maps-link" href="https://maps.google.com/?q=New+York+Deli+2920+W+Cary+St+Richmond+VA" target="_blank">📍 NY Deli</a><div class="stop-note">• ZZQ Texas Craft BBQ ⭐ 4.7 · • Buz and Ned's ⭐ 4.3 · • Mama J's · • Urban Farmhouse · • New York Deli (1929)</div><span class="stop-tag tag-aberto">5 opções</span></div></div>
       <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Hertz — Dulles Airport (IAD)</div><a class="maps-link" href="https://maps.google.com/?q=Hertz+Car+Rental+Washington+Dulles+Airport" target="_blank">📍 Google Maps</a><div class="stop-note">Entregar carro até 17h30. Hertz Gold lot.</div><span class="stop-tag tag-hot">Deadline 17h30!</span></div></div>
       <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Courtyard by Marriott — Dulles Airport</div><a class="maps-link" href="https://maps.google.com/?cid=10869374656729656441" target="_blank">📍 Google Maps</a><div class="stop-note">13715 Sayward Blvd, Herndon. Check-in e metro para Washington.</div><span class="stop-tag tag-hotel">Hotel até 4 Jul</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🏛️</div><div class="stop-body"><div class="stop-time">~16h00</div><div class="stop-name">National Mall — Monumentos</div><a class="maps-link" href="https://maps.google.com/?q=Lincoln+Memorial+Washington+DC" target="_blank">📍 Lincoln Memorial</a> <a class="maps-link" href="https://maps.google.com/?q=Washington+Monument+Washington+DC" target="_blank">📍 Washington Monument</a><div class="stop-note">Tarde a pé: Lincoln Memorial · Washington Monument · Vietnam Veterans Memorial · Capitol Building</div><span class="stop-tag tag-scenic">Grátis</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🏛️</div><div class="stop-body"><div class="stop-time">~16h00</div><div class="stop-name">National Mall — Monumentos</div><a class="maps-link" href="https://maps.google.com/?q=Lincoln+Memorial+Washington+DC" target="_blank">📍 Lincoln Memorial</a> <a class="maps-link" href="https://maps.google.com/?q=Washington+Monument+Washington+DC" target="_blank">📍 Washington Monument</a><div class="stop-note">Tarde a pé: Lincoln Memorial · Washington Monument · Vietnam Veterans Memorial · Capitol</div><span class="stop-tag tag-scenic">Grátis</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">R4</div><div class="day-info"><div class="day-date">Quinta, 3 Julho</div><div class="day-route">Washington — Turismo + Véspera 4 Jul</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🚀</div><div class="stop-body"><div class="stop-time">10h00</div><div class="stop-name">National Air & Space Museum</div><a class="maps-link" href="https://maps.google.com/?cid=17935525282803673115" target="_blank">📍 Google Maps</a><div class="stop-note">Reservar timed-entry pass! Apollo 11, Wright Brothers, fatos espaciais. Gratuito. ⭐ 4.6<br>650 Jefferson Dr SW</div><span class="stop-tag tag-museum">Ciência</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🎨</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Hirshhorn Museum — Arte Contemporânea</div><a class="maps-link" href="https://maps.google.com/?cid=3820288075105990041" target="_blank">📍 Google Maps</a><div class="stop-note">Edifício icónico em forma de donut. Picasso, Pollock, Banksy. Gratuito. ⭐ 4.5</div><span class="stop-tag tag-museum">Arte Contemporânea</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~17h00</div><div class="stop-name">Jazz no Sculpture Garden — National Gallery</div><a class="maps-link" href="https://maps.google.com/?q=National+Gallery+of+Art+Sculpture+Garden+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Todas as sextas-feiras! Músicos de jazz locais junto à fonte. Gratuito.</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🚀</div><div class="stop-body"><div class="stop-time">10h00</div><div class="stop-name">National Air & Space Museum</div><a class="maps-link" href="https://maps.google.com/?cid=17935525282803673115" target="_blank">📍 Google Maps</a><div class="stop-note">Reservar timed-entry pass! Apollo 11, Wright Brothers. Gratuito. ⭐ 4.6</div><span class="stop-tag tag-museum">Ciência</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🎨</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Hirshhorn Museum — Arte Contemporânea</div><a class="maps-link" href="https://maps.google.com/?cid=3820288075105990041" target="_blank">📍 Google Maps</a><div class="stop-note">Picasso, Pollock, Banksy. Gratuito. ⭐ 4.5</div><span class="stop-tag tag-museum">Arte Contemporânea</span></div></div>
+      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~17h00</div><div class="stop-name">Jazz no Sculpture Garden — National Gallery</div><a class="maps-link" href="https://maps.google.com/?q=National+Gallery+of+Art+Sculpture+Garden+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Todas as sextas-feiras! Jazz ao vivo junto à fonte. Gratuito.</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
       <div class="stop"><div class="stop-icon icon-music">🎶</div><div class="stop-body"><div class="stop-time">21h00</div><div class="stop-name">"A Capital Fourth" — Concerto no Capitólio</div><a class="maps-link" href="https://maps.google.com/?q=US+Capitol+West+Lawn+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Concerto gratuito. Acesso abre 15h. Véspera do 250º Independence Day! 🇺🇸</div><span class="stop-tag tag-scenic">Gratuito 🎆</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
     <div class="day-header"><div class="day-num">🎆</div><div class="day-info"><div class="day-date">Sexta, 4 Julho</div><div class="day-route">Independence Day 250º → Lisboa</div></div><div class="day-arrow">▼</div></div>
     <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">📜</div><div class="stop-body"><div class="stop-time">9h30</div><div class="stop-name">National Archives — Declaração de Independência</div><a class="maps-link" href="https://maps.google.com/?q=National+Archives+700+Pennsylvania+Ave+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Leitura da Declaração às 10h. Ver o original no seu 250º aniversário. Chega CEDO!</div><span class="stop-tag tag-scenic">Histórico</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🥁</div><div class="stop-body"><div class="stop-time">11h45</div><div class="stop-name">Desfile Independence Day — Constitution Ave</div><a class="maps-link" href="https://maps.google.com/?q=Constitution+Avenue+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">O maior desfile de sempre! Todos os 50 estados, bandas, militares. Multidões imensas — chega cedo e leva água. 🇺🇸</div><span class="stop-tag tag-hot">America 250!</span></div></div>
-      <div class="stop"><div class="stop-icon icon-car">🚇</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Metro para Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Dulles Airport</a><div class="stop-note">Espera 45 min nas estações neste dia. Sai cedo!</div><span class="stop-tag tag-hot">⚠️ Sai cedo!</span></div></div>
-      <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">22h30</div><div class="stop-name">Voo para Lisboa — Washington Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Google Maps</a><div class="stop-note">Check-in ~20h. Sem emigração na saída. TSA = ~45 min. Boa viagem! 🇵🇹</div><span class="stop-tag tag-hotel">Regresso Lisboa</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">📜</div><div class="stop-body"><div class="stop-time">9h30</div><div class="stop-name">National Archives — Declaração de Independência</div><a class="maps-link" href="https://maps.google.com/?q=National+Archives+700+Pennsylvania+Ave+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Leitura da Declaração às 10h. 250º aniversário. Chega CEDO!</div><span class="stop-tag tag-scenic">Histórico</span></div></div>
+      <div class="stop"><div class="stop-icon icon-sight">🥁</div><div class="stop-body"><div class="stop-time">11h45</div><div class="stop-name">Desfile Independence Day — Constitution Ave</div><a class="maps-link" href="https://maps.google.com/?q=Constitution+Avenue+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">O maior desfile de sempre! 50 estados, bandas, flyovers. 🇺🇸</div><span class="stop-tag tag-hot">America 250!</span></div></div>
+      <div class="stop"><div class="stop-icon icon-car">🚇</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Metro para Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Dulles Airport</a><div class="stop-note">Espera 45 min nas estações. Sai cedo!</div><span class="stop-tag tag-hot">⚠️ Sai cedo!</span></div></div>
+      <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">22h30</div><div class="stop-name">Voo para Lisboa — Washington Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Google Maps</a><div class="stop-note">Check-in ~20h. TSA = ~45 min. Boa viagem! 🇵🇹</div><span class="stop-tag tag-hotel">Regresso Lisboa</span></div></div>
     </div>
   </div>
 </div>
@@ -391,7 +357,7 @@
   <div class="section-label">Ida</div>
   <div class="hotels-list">
     <div class="hotel-item"><div class="hotel-emoji">🏨</div><div class="hotel-info"><div class="hotel-name">GLo Hotel</div><div class="hotel-city">Asheville, NC — Noite 1</div><div class="hotel-addr">509 Tunnel Rd, Asheville, NC 28805</div></div><div class="hotel-nights">24 Jun</div></div>
-    <div class="hotel-item"><div class="hotel-emoji">🏙️</div><div class="hotel-info"><div class="hotel-name">Aloft Savannah Downtown Historic District</div><div class="hotel-city">Savannah, GA — Noite 2</div><div class="hotel-addr">512 W Oglethorpe Ave, Savannah, GA 31401</div></div><div class="hotel-nights">25 Jun</div></div>
+    <div class="hotel-item"><div class="hotel-emoji">🏙️</div><div class="hotel-info"><div class="hotel-name">Aloft Savannah Downtown</div><div class="hotel-city">Savannah, GA — Noite 2</div><div class="hotel-addr">512 W Oglethorpe Ave, Savannah, GA 31401</div></div><div class="hotel-nights">25 Jun</div></div>
     <div class="hotel-item"><div class="hotel-emoji">🌴</div><div class="hotel-info"><div class="hotel-name">Treehouse Hotel</div><div class="hotel-city">Miami, FL — 4 noites</div><div class="hotel-addr">7126 Biscayne Blvd, Miami, FL 33138</div></div><div class="hotel-nights">26-29 Jun</div></div>
   </div>
   <div class="section-label">Regresso</div>
@@ -414,7 +380,7 @@
       <div class="flight-detail"><div class="detail-label">Gate / Bag</div><div class="detail-value">C8 / C.15</div></div>
     </div>
   </div>
-  <div class="tip-card"><div class="tip-title">📱 Ao aterrar</div><div class="tip-text">1. Liga eSIM Visible (Verizon) 2. Abre app MPC, tira selfie e submete (Terminal 2 na app) 3. Vai para fila MPC — mais rápida! 4. Bagagem carrossel 15 5. Hertz Gold lot — vai direto sem counter.</div></div>
+  <div class="tip-card"><div class="tip-title">📱 Ao aterrar</div><div class="tip-text">1. Liga eSIM Visible 2. Abre MPC, tira selfie e submete (Terminal 2) 3. Fila MPC 4. Bagagem carrossel 15 5. Hertz Gold lot — sem counter.</div></div>
   <div class="flight-card">
     <div class="flight-header"><div class="flight-num">Regresso</div><span class="stop-tag tag-bbq">VOLTA</span></div>
     <div class="flight-route"><div><div class="airport-code">IAD</div><div style="font-size:11px;color:var(--muted)">Washington</div></div><div class="flight-line"></div><div style="text-align:right"><div class="airport-code">LIS</div><div style="font-size:11px;color:var(--muted)">Lisboa</div></div></div>
@@ -425,22 +391,19 @@
       <div class="flight-detail"><div class="detail-label">Sair DC</div><div class="detail-value">~18h00</div></div>
     </div>
   </div>
-  <div class="tip-card"><div class="tip-title">⚠️ Dia 4 Jul — Multidões</div><div class="tip-text">O 4 de julho é o 250º aniversário dos EUA. Washington vai estar com mais de 1 milhão de pessoas. Metro lotado, esperas de 45 min. Não tentes conduzir. Sai do centro às 18h.</div></div>
+  <div class="tip-card"><div class="tip-title">⚠️ Dia 4 Jul — Multidões</div><div class="tip-text">250º aniversário dos EUA. Metro lotado, esperas de 45 min. Não tentes conduzir. Sai do centro às 18h.</div></div>
 </div>
 
 <!-- DOCUMENTOS -->
 <div class="content section" id="docs">
   <div class="docs-header">
-    <div>
-      <div class="section-label" style="margin:0 0 4px">📄 Documentos</div>
-      <div style="font-size:12px;color:var(--muted)">Pasta Google Drive sincronizada</div>
-    </div>
+    <div><div class="section-label" style="margin:0 0 4px">📄 Documentos</div><div style="font-size:12px;color:var(--muted)">Pasta Google Drive sincronizada</div></div>
     <div style="display:flex;gap:8px;align-items:center">
-      <button class="docs-refresh-btn" onclick="loadDocs()">↻ Atualizar</button>
+      <button class="docs-refresh-btn" onclick="loadDocs()">↻</button>
       <a class="docs-upload-btn" href="https://drive.google.com/drive/folders/18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG" target="_blank">+ Adicionar</a>
     </div>
   </div>
-  <div id="docs-list"><div class="docs-loading">A carregar documentos...</div></div>
+  <div id="docs-list"><div class="docs-loading">A carregar...</div></div>
 </div>
 
 <!-- DICAS -->
@@ -452,7 +415,6 @@
     <div class="info-row"><span class="info-row-label">Duração</span><span class="info-row-value">14 dias</span></div>
     <div class="info-row"><span class="info-row-label">Dados</span><span class="info-row-value">Unlimited (2GB/dia 5G, depois 3G)</span></div>
     <div class="info-row"><span class="info-row-label">Chamadas</span><span class="info-row-value">Unlimited USA + 180 min intl</span></div>
-    <div class="info-row"><span class="info-row-label">Telemóvel</span><span class="info-row-value">Pixel 8 — dual SIM ✅</span></div>
     <div class="info-row"><span class="info-row-label">Ativar</span><span class="info-row-value">Ao aterrar em Dulles</span></div>
   </div>
   <div class="section-label">Carro</div>
@@ -464,10 +426,10 @@
     <div class="info-row"><span class="info-row-label">Devolução</span><span class="info-row-value">2 Jul até 17h30 — IAD</span></div>
   </div>
   <div class="section-label">Dicas importantes</div>
-  <div class="tip-card"><div class="tip-title">🌶️ PuckerButt — Ed Curlin</div><div class="tip-text">É a loja do criador do Carolina Reaper. Provar tudo de graça antes de comprar. Não compres o Thermageddon antes de entrar no carro!</div></div>
-  <div class="tip-card"><div class="tip-title">🍗 Mrs. Wilkes — Regras</div><div class="tip-text">Só abre seg-sex das 11h às 14h. Sem reservas — é fila na rua. Chega pelo menos 30 min antes. Mesas para 8 pessoas com desconhecidos. Só aceita cash ou Venmo.</div></div>
-  <div class="tip-card"><div class="tip-title">🎵 Vinil — Dicas</div><div class="tip-text">Para Tame Impala, Beach House, Grizzly Bear e Walkmen: Tiger Records em Jacksonville tem ótima curadoria indie. Yesterday & Today fecha às segundas.</div></div>
-  <div class="tip-card"><div class="tip-title">🏛️ Washington — Air & Space</div><div class="tip-text">Reserva timed-entry pass GRÁTIS em airandspace.si.edu com antecedência. O dia 3 de julho vai estar muito cheio.</div></div>
+  <div class="tip-card"><div class="tip-title">🌶️ PuckerButt</div><div class="tip-text">Loja do criador do Carolina Reaper. Provar tudo de graça. Não compres o Thermageddon antes de entrar no carro!</div></div>
+  <div class="tip-card"><div class="tip-title">🍗 Mrs. Wilkes</div><div class="tip-text">Só seg-sex 11h-14h. Fila na rua. Chega 30 min antes. Só aceita cash ou Venmo.</div></div>
+  <div class="tip-card"><div class="tip-title">🎵 Vinil</div><div class="tip-text">Tiger Records em Jacksonville tem ótima curadoria indie. Yesterday & Today fecha às segundas.</div></div>
+  <div class="tip-card"><div class="tip-title">🏛️ Air & Space</div><div class="tip-text">Reserva timed-entry pass GRÁTIS em airandspace.si.edu com antecedência.</div></div>
 </div>
 
 <div class="footer">
@@ -476,86 +438,193 @@
   <strong>24 Junho — 4 Julho 2026</strong>
 </div>
 
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async></script>
+
 <script>
+const CLIENT_ID = '527652370406-3hvsb9o5au2n3gakam26khrstflabm0r.apps.googleusercontent.com';
 const DRIVE_API_KEY = 'AIzaSyANCvcBDizb1y1mK5PaJ_X5nSlfkMS07jI';
 const FOLDER_ID = '18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG';
+const CHECKLIST_FILE = 'roadtrip_checklist.json';
 
-function getFileIcon(mimeType) {
-  if (mimeType === 'application/pdf') return '📄';
-  if (mimeType.includes('image')) return '🖼️';
-  if (mimeType.includes('word') || mimeType.includes('document')) return '📝';
-  if (mimeType.includes('sheet') || mimeType.includes('excel')) return '📊';
-  if (mimeType.includes('presentation') || mimeType.includes('powerpoint')) return '📊';
-  if (mimeType.includes('folder')) return '📁';
-  return '📎';
+let accessToken = null;
+let checklistFileId = null;
+let saveTimer = null;
+let isLoggedIn = false;
+
+// ─── AUTH ───────────────────────────────────────────
+function initGoogleAuth() {
+  google.accounts.id.initialize({
+    client_id: CLIENT_ID,
+    callback: onLoginSuccess,
+    auto_select: true
+  });
 }
 
-function formatSize(bytes) {
-  if (!bytes) return '';
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024*1024) return (bytes/1024).toFixed(0) + ' KB';
-  return (bytes/(1024*1024)).toFixed(1) + ' MB';
+function handleAuth() {
+  if (isLoggedIn) {
+    // Logout
+    google.accounts.id.disableAutoSelect();
+    accessToken = null;
+    isLoggedIn = false;
+    document.getElementById('auth-label').textContent = '🔐 Login';
+    document.getElementById('checklist-login-prompt').style.display = 'block';
+    document.getElementById('checklist-content').style.opacity = '0.5';
+    document.getElementById('sync-status').textContent = '';
+    return;
+  }
+  // Trigger login popup
+  google.accounts.oauth2.initTokenClient({
+    client_id: CLIENT_ID,
+    scope: 'https://www.googleapis.com/auth/drive.file',
+    callback: onTokenReceived
+  }).requestAccessToken();
 }
 
-function formatDate(str) {
-  if (!str) return '';
-  const d = new Date(str);
-  return d.toLocaleDateString('pt-PT', {day:'2-digit', month:'short', year:'numeric'});
+function onTokenReceived(resp) {
+  if (resp.error) return;
+  accessToken = resp.access_token;
+  isLoggedIn = true;
+
+  // Get user info
+  fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+    headers: { Authorization: `Bearer ${accessToken}` }
+  }).then(r => r.json()).then(info => {
+    const name = info.given_name || info.name || 'João';
+    document.getElementById('auth-label').innerHTML =
+      `<img src="${info.picture}" class="auth-avatar"> ${name}`;
+    document.getElementById('checklist-login-prompt').style.display = 'none';
+    document.getElementById('checklist-content').style.opacity = '1';
+    loadChecklist();
+  });
 }
 
-async function loadDocs() {
-  const list = document.getElementById('docs-list');
-  list.innerHTML = '<div class="docs-loading">⏳ A carregar...</div>';
+function onLoginSuccess(resp) {
+  // auto-select handler — not used for token flow
+}
+
+// ─── CHECKLIST SYNC ──────────────────────────────────
+async function loadChecklist() {
+  setSyncStatus('A carregar...', false);
   try {
-    const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+trashed=false&fields=files(id,name,mimeType,size,modifiedTime,webViewLink)&orderBy=name&key=${DRIVE_API_KEY}`;
-    const res = await fetch(url);
+    // Find file in drive
+    const res = await fetch(
+      `https://www.googleapis.com/drive/v3/files?q=name='${CHECKLIST_FILE}'+and+'${FOLDER_ID}'+in+parents+and+trashed=false&fields=files(id)`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
     const data = await res.json();
-
-    if (data.error) {
-      list.innerHTML = `<div class="docs-error">⚠️ Erro: ${data.error.message}<br><small>Verifica que a API Key está configurada corretamente.</small></div>`;
-      return;
+    if (data.files && data.files.length > 0) {
+      checklistFileId = data.files[0].id;
+      const content = await fetch(
+        `https://www.googleapis.com/drive/v3/files/${checklistFileId}?alt=media`,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      const json = await content.json();
+      restoreChecklist(json);
+      setSyncStatus('✓ Sincronizado', false);
+    } else {
+      setSyncStatus('Novo — pronto', false);
     }
-
-    if (!data.files || data.files.length === 0) {
-      list.innerHTML = `
-        <div class="docs-empty">
-          <div class="docs-empty-icon">📂</div>
-          <div class="docs-empty-text">Pasta vazia — adiciona os teus documentos!</div>
-          <a class="docs-upload-btn" href="https://drive.google.com/drive/folders/${FOLDER_ID}" target="_blank">Abrir pasta no Drive</a>
-        </div>`;
-      return;
-    }
-
-    list.innerHTML = data.files.map(f => `
-      <a class="doc-item" href="${f.webViewLink}" target="_blank">
-        <div class="doc-icon">${getFileIcon(f.mimeType)}</div>
-        <div class="doc-info">
-          <div class="doc-name">${f.name}</div>
-          <div class="doc-meta">${formatDate(f.modifiedTime)}${f.size ? ' · ' + formatSize(parseInt(f.size)) : ''}</div>
-        </div>
-        <div class="doc-open">→</div>
-      </a>`).join('');
   } catch(e) {
-    list.innerHTML = `<div class="docs-error">⚠️ Erro de ligação: ${e.message}</div>`;
+    setSyncStatus('Erro ao carregar', false);
   }
 }
 
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
-  if (id === 'docs') loadDocs();
+function getChecklistState() {
+  const extractList = (id) => {
+    return [...document.querySelectorAll(`#${id} .check-item`)].map(item => ({
+      text: item.querySelector('.check-text').textContent,
+      checked: item.classList.contains('checked'),
+      badge: item.querySelector('.check-badge').className.replace('check-badge ', '')
+    }));
+  };
+  return { done: extractList('list-done'), todo: extractList('list-todo') };
 }
 
-function toggleDay(card) { card.classList.toggle('open'); }
+function restoreChecklist(state) {
+  if (!state) return;
+  const restoreList = (id, items) => {
+    const container = document.getElementById(id);
+    // Keep only default items that exist in saved state, add extras
+    container.innerHTML = '';
+    items.forEach(item => {
+      const el = createCheckItem(item.text, item.badge, item.checked);
+      setupDrag(el);
+      container.appendChild(el);
+    });
+  };
+  if (state.done) restoreList('list-done', state.done);
+  if (state.todo) restoreList('list-todo', state.todo);
+}
+
+async function saveChecklist() {
+  if (!isLoggedIn || !accessToken) return;
+  setSyncStatus('💾 A guardar...', true);
+  const content = JSON.stringify(getChecklistState());
+  const blob = new Blob([content], { type: 'application/json' });
+
+  try {
+    if (checklistFileId) {
+      // Update existing
+      await fetch(`https://www.googleapis.com/upload/drive/v3/files/${checklistFileId}?uploadType=media`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+        body: content
+      });
+    } else {
+      // Create new
+      const meta = { name: CHECKLIST_FILE, parents: [FOLDER_ID] };
+      const form = new FormData();
+      form.append('metadata', new Blob([JSON.stringify(meta)], { type: 'application/json' }));
+      form.append('file', blob);
+      const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body: form
+      });
+      const data = await res.json();
+      checklistFileId = data.id;
+    }
+    setSyncStatus('✓ Guardado', false);
+  } catch(e) {
+    setSyncStatus('Erro ao guardar', false);
+  }
+}
+
+function scheduleSave() {
+  if (!isLoggedIn) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveChecklist, 1500);
+}
+
+function setSyncStatus(msg, saving) {
+  const el = document.getElementById('sync-status');
+  if (el) {
+    el.textContent = msg;
+    el.style.color = saving ? 'var(--accent2)' : 'var(--muted)';
+  }
+}
+
+// ─── CHECKLIST UI ────────────────────────────────────
+function createCheckItem(text, badgeClass, checked) {
+  const labels = {'badge-done':'feito','badge-todo':'urgente','badge-pending':'pendente'};
+  const el = document.createElement('div');
+  el.className = 'check-item' + (checked ? ' checked' : '');
+  el.draggable = true;
+  el.innerHTML = `<span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">${checked?'✓':''}</div><div class="check-text" onclick="toggleCheck(this.parentElement)">${text}</div><span class="check-badge ${badgeClass}">${labels[badgeClass]||badgeClass}</span><button class="delete-btn" onclick="deleteItem(this)">✕</button>`;
+  return el;
+}
 
 function toggleCheck(item) {
   item.classList.toggle('checked');
   item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
+  scheduleSave();
 }
 
-function deleteItem(btn) { btn.closest('.check-item').remove(); }
+function deleteItem(btn) {
+  btn.closest('.check-item').remove();
+  scheduleSave();
+}
 
 function addItem(listId, inputId, selectId) {
   const input = document.getElementById(inputId);
@@ -563,22 +632,20 @@ function addItem(listId, inputId, selectId) {
   const text = input.value.trim();
   if (!text) return;
   const badgeClass = select.value;
-  const labels = {'badge-done':'feito','badge-todo':'urgente','badge-pending':'pendente'};
   const isChecked = badgeClass === 'badge-done';
-  const item = document.createElement('div');
-  item.className = 'check-item' + (isChecked ? ' checked' : '');
-  item.draggable = true;
-  item.innerHTML = `<span class="drag-handle">⠿</span><div class="check-box" onclick="toggleCheck(this.parentElement)">${isChecked?'✓':''}</div><div class="check-text" onclick="toggleCheck(this.parentElement)">${text}</div><span class="check-badge ${badgeClass}">${labels[badgeClass]}</span><button class="delete-btn" onclick="deleteItem(this)">✕</button>`;
+  const item = createCheckItem(text, badgeClass, isChecked);
   setupDrag(item);
   document.getElementById(listId).appendChild(item);
   input.value = '';
   input.focus();
+  scheduleSave();
 }
 
+// ─── DRAG & DROP ─────────────────────────────────────
 let dragSrc = null;
 function setupDrag(el) {
   el.addEventListener('dragstart', e => { dragSrc = el; el.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
-  el.addEventListener('dragend', () => { el.classList.remove('dragging'); document.querySelectorAll('.drag-over').forEach(e => e.classList.remove('drag-over')); });
+  el.addEventListener('dragend', () => { el.classList.remove('dragging'); document.querySelectorAll('.drag-over').forEach(e => e.classList.remove('drag-over')); scheduleSave(); });
   el.addEventListener('dragover', e => { e.preventDefault(); if (el !== dragSrc) el.classList.add('drag-over'); });
   el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
   el.addEventListener('drop', e => {
@@ -594,6 +661,69 @@ function setupDrag(el) {
   });
 }
 document.querySelectorAll('.check-item').forEach(setupDrag);
+
+// ─── DOCS ─────────────────────────────────────────────
+function getFileIcon(m) {
+  if (m==='application/pdf') return '📄';
+  if (m.includes('image')) return '🖼️';
+  if (m.includes('word')||m.includes('document')) return '📝';
+  if (m.includes('sheet')||m.includes('excel')) return '📊';
+  return '📎';
+}
+function formatSize(b) {
+  if (!b) return '';
+  if (b<1024) return b+' B';
+  if (b<1024*1024) return (b/1024).toFixed(0)+' KB';
+  return (b/(1024*1024)).toFixed(1)+' MB';
+}
+function formatDate(s) {
+  if (!s) return '';
+  return new Date(s).toLocaleDateString('pt-PT',{day:'2-digit',month:'short',year:'numeric'});
+}
+
+async function loadDocs() {
+  const list = document.getElementById('docs-list');
+  list.innerHTML = '<div class="docs-loading">⏳ A carregar...</div>';
+  try {
+    const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+trashed=false+and+name!='${CHECKLIST_FILE}'&fields=files(id,name,mimeType,size,modifiedTime,webViewLink)&orderBy=name&key=${DRIVE_API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.error) { list.innerHTML = `<div class="docs-error">⚠️ ${data.error.message}</div>`; return; }
+    if (!data.files||data.files.length===0) {
+      list.innerHTML = `<div class="docs-empty"><div class="docs-empty-icon">📂</div><div class="docs-empty-text">Pasta vazia — adiciona os teus documentos!</div><a class="docs-upload-btn" href="https://drive.google.com/drive/folders/${FOLDER_ID}" target="_blank">Abrir Drive</a></div>`;
+      return;
+    }
+    list.innerHTML = data.files.map(f=>`<a class="doc-item" href="${f.webViewLink}" target="_blank"><div class="doc-icon">${getFileIcon(f.mimeType)}</div><div class="doc-info"><div class="doc-name">${f.name}</div><div class="doc-meta">${formatDate(f.modifiedTime)}${f.size?' · '+formatSize(parseInt(f.size)):''}</div></div><div class="doc-open">→</div></a>`).join('');
+  } catch(e) {
+    list.innerHTML = `<div class="docs-error">⚠️ ${e.message}</div>`;
+  }
+}
+
+// ─── NAVIGATION ───────────────────────────────────────
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  if (id==='docs') loadDocs();
+}
+
+function toggleDay(card) { card.classList.toggle('open'); }
+
+// ─── INIT ─────────────────────────────────────────────
+window.addEventListener('load', () => {
+  // Show login prompt in checklist if not logged in
+  document.getElementById('checklist-login-prompt').style.display = 'block';
+  document.getElementById('checklist-content').style.opacity = '0.6';
+
+  // Init Google auth when library loads
+  const checkGapi = setInterval(() => {
+    if (window.google && window.google.accounts) {
+      clearInterval(checkGapi);
+      initGoogleAuth();
+    }
+  }, 200);
+});
 </script>
 </body>
 </html>
