@@ -18,13 +18,9 @@
   .logo { font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 2px; color: var(--accent); }
   .logo span { color: var(--text); }
 
-  /* AUTH */
   .auth-btn { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; cursor: pointer; font-size: 12px; color: var(--text); font-family: 'DM Sans', sans-serif; }
   .auth-btn:hover { border-color: var(--accent); }
-  .auth-avatar { width: 24px; height: 24px; border-radius: 50%; }
-  .auth-name { max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .sync-indicator { font-size: 10px; color: var(--green); margin-left: 4px; }
-  .sync-indicator.saving { color: var(--accent2); }
+  .auth-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
   .tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 16px; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
@@ -45,7 +41,6 @@
   .stat-num { font-family: 'Bebas Neue', cursive; font-size: 28px; color: var(--accent); line-height: 1; }
   .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-  /* CHECKLIST */
   .checklist-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
   .checklist-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
   .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); position: relative; border-radius: 6px; user-select: none; }
@@ -71,7 +66,6 @@
   .badge-select { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
   .add-btn { background: var(--accent); border: none; border-radius: 8px; color: white; font-size: 20px; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-  /* LOGIN PROMPT */
   .login-prompt { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 12px; }
   .login-prompt-icon { font-size: 36px; margin-bottom: 12px; }
   .login-prompt-text { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
@@ -136,10 +130,9 @@
   .info-row-value { font-weight: 500; font-family: 'DM Mono', monospace; font-size: 12px; }
   .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 20px 0 10px; }
 
-  /* DOCS */
   .docs-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
   .docs-upload-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: white; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; }
-  .docs-refresh-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .docs-refresh-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; }
   .doc-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); transition: border-color 0.2s; }
   .doc-item:hover { border-color: var(--accent); }
   .doc-icon { font-size: 28px; flex-shrink: 0; }
@@ -151,7 +144,7 @@
   .docs-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
   .docs-empty-icon { font-size: 48px; margin-bottom: 12px; }
   .docs-empty-text { font-size: 14px; margin-bottom: 16px; }
-  .docs-error { background: rgba(232,66,26,0.1); border: 1px solid rgba(232,66,26,0.3); border-radius: 10px; padding: 14px; color: var(--accent); font-size: 13px; margin-bottom: 12px; }
+  .docs-error { background: rgba(232,66,26,0.1); border: 1px solid rgba(232,66,26,0.3); border-radius: 10px; padding: 14px; color: var(--accent); font-size: 13px; }
 
   .footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 12px; }
   .flag-row { font-size: 24px; margin-bottom: 8px; }
@@ -216,13 +209,11 @@
       </button>
     </div>
   </div>
-
   <div id="checklist-content">
     <div class="section-label" style="display:flex;justify-content:space-between;align-items:center">
       <span>Antes de partir</span>
       <span id="sync-status" style="font-size:11px;color:var(--muted)"></span>
     </div>
-
     <div class="checklist-card">
       <div class="checklist-title">✅ Já tratado</div>
       <div id="list-done" class="check-list">
@@ -245,7 +236,6 @@
         <button class="add-btn" onclick="addItem('list-done','input-done','badge-done-sel')">+</button>
       </div>
     </div>
-
     <div class="checklist-card">
       <div class="checklist-title">📋 Por fazer</div>
       <div id="list-todo" class="check-list">
@@ -281,7 +271,7 @@
       <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~14h30</div><div class="stop-name">Blue Bar & Smokehouse — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=7120205965848807323" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do PuckerButt. Ribs, brisket, smoked wings. ⭐ 4.5</div><span class="stop-tag tag-bbq">BBQ</span></div></div>
       <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~19h30 — se der</div><div class="stop-name">Rody's Records — Savannah, GA</div><a class="maps-link" href="https://maps.google.com/?cid=14266658907859923401" target="_blank">📍 Google Maps</a><div class="stop-note">Plano B — só se chegares antes das 19h. ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
       <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Aloft Savannah Downtown</div><a class="maps-link" href="https://maps.google.com/?q=512+W+Oglethorpe+Ave+Savannah+GA" target="_blank">📍 Google Maps</a><div class="stop-note">512 W Oglethorpe Ave · Check-in e deixar as malas</div><span class="stop-tag tag-hotel">Hotel noite 2</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. ⭐ 4.5 · 116 E Broughton St</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
+      <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. ⭐ 4.5</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
       <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Jazz'd Tapas Bar</div><a class="maps-link" href="https://maps.google.com/?cid=10116845647888913240" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo às quintas. Abre às 16h. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
     </div>
   </div>
@@ -312,7 +302,7 @@
       <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~17h30</div><div class="stop-name">Villa 1565 — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=3365190361966199704" target="_blank">📍 Google Maps</a><div class="stop-note">137 San Marco Ave · 2 piscinas · Buffet incluído · Árvore 650 anos!</div><span class="stop-tag tag-hotel">Hotel noite R1</span></div></div>
       <div class="stop"><div class="stop-icon icon-sight">🚶</div><div class="stop-body"><div class="stop-time">~18h30</div><div class="stop-name">Centro Histórico de Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?q=St+George+Street+Saint+Augustine+FL+32084" target="_blank">📍 Google Maps</a><div class="stop-note">A cidade mais antiga dos EUA (1565). Tudo a pé do hotel.</div><span class="stop-tag tag-scenic">Historic District</span></div></div>
       <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~20h00</div><div class="stop-name">Brisky's BBQ — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=7230512102769115016" target="_blank">📍 Google Maps</a><div class="stop-note">Datil Brisket Bowl — especialidade local! ⭐ 4.8 · Fecha às 19h!</div><span class="stop-tag tag-bbq">BBQ Local</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. Humidor, craft beer. ⭐ 4.6 · 36 Charlotte St</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. Humidor, craft beer. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
     </div>
   </div>
   <div class="day-card" onclick="toggleDay(this)">
@@ -438,42 +428,29 @@
   <strong>24 Junho — 4 Julho 2026</strong>
 </div>
 
-<!-- Google Identity Services -->
 <script src="https://accounts.google.com/gsi/client" async></script>
-
 <script>
 const CLIENT_ID = '527652370406-3hvsb9o5au2n3gakam26khrstflabm0r.apps.googleusercontent.com';
 const DRIVE_API_KEY = 'AIzaSyANCvcBDizb1y1mK5PaJ_X5nSlfkMS07jI';
 const FOLDER_ID = '18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG';
 const CHECKLIST_FILE = 'roadtrip_checklist.json';
 
-let accessToken = null;
-let checklistFileId = null;
-let saveTimer = null;
-let isLoggedIn = false;
+let accessToken = null, checklistFileId = null, saveTimer = null, isLoggedIn = false;
 
-// ─── AUTH ───────────────────────────────────────────
 function initGoogleAuth() {
-  google.accounts.id.initialize({
-    client_id: CLIENT_ID,
-    callback: onLoginSuccess,
-    auto_select: true
-  });
+  google.accounts.id.initialize({ client_id: CLIENT_ID, callback: () => {}, auto_select: false });
 }
 
 function handleAuth() {
   if (isLoggedIn) {
-    // Logout
     google.accounts.id.disableAutoSelect();
-    accessToken = null;
-    isLoggedIn = false;
-    document.getElementById('auth-label').textContent = '🔐 Login';
+    accessToken = null; isLoggedIn = false;
+    document.getElementById('auth-label').innerHTML = '🔐 Login';
     document.getElementById('checklist-login-prompt').style.display = 'block';
     document.getElementById('checklist-content').style.opacity = '0.5';
     document.getElementById('sync-status').textContent = '';
     return;
   }
-  // Trigger login popup
   google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/drive.file',
@@ -485,29 +462,22 @@ function onTokenReceived(resp) {
   if (resp.error) return;
   accessToken = resp.access_token;
   isLoggedIn = true;
-
-  // Get user info
   fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
     headers: { Authorization: `Bearer ${accessToken}` }
   }).then(r => r.json()).then(info => {
     const name = info.given_name || info.name || 'João';
+    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     document.getElementById('auth-label').innerHTML =
-      `<img src="${info.picture}" class="auth-avatar"> ${name}`;
+      `<div class="auth-avatar">${initials}</div> ${name}`;
     document.getElementById('checklist-login-prompt').style.display = 'none';
     document.getElementById('checklist-content').style.opacity = '1';
     loadChecklist();
   });
 }
 
-function onLoginSuccess(resp) {
-  // auto-select handler — not used for token flow
-}
-
-// ─── CHECKLIST SYNC ──────────────────────────────────
 async function loadChecklist() {
   setSyncStatus('A carregar...', false);
   try {
-    // Find file in drive
     const res = await fetch(
       `https://www.googleapis.com/drive/v3/files?q=name='${CHECKLIST_FILE}'+and+'${FOLDER_ID}'+in+parents+and+trashed=false&fields=files(id)`,
       { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -523,21 +493,17 @@ async function loadChecklist() {
       restoreChecklist(json);
       setSyncStatus('✓ Sincronizado', false);
     } else {
-      setSyncStatus('Novo — pronto', false);
+      setSyncStatus('Pronto', false);
     }
-  } catch(e) {
-    setSyncStatus('Erro ao carregar', false);
-  }
+  } catch(e) { setSyncStatus('Erro ao carregar', false); }
 }
 
 function getChecklistState() {
-  const extractList = (id) => {
-    return [...document.querySelectorAll(`#${id} .check-item`)].map(item => ({
-      text: item.querySelector('.check-text').textContent,
-      checked: item.classList.contains('checked'),
-      badge: item.querySelector('.check-badge').className.replace('check-badge ', '')
-    }));
-  };
+  const extractList = (id) => [...document.querySelectorAll(`#${id} .check-item`)].map(item => ({
+    text: item.querySelector('.check-text').textContent,
+    checked: item.classList.contains('checked'),
+    badge: item.querySelector('.check-badge').className.replace('check-badge ', '')
+  }));
   return { done: extractList('list-done'), todo: extractList('list-todo') };
 }
 
@@ -545,13 +511,8 @@ function restoreChecklist(state) {
   if (!state) return;
   const restoreList = (id, items) => {
     const container = document.getElementById(id);
-    // Keep only default items that exist in saved state, add extras
     container.innerHTML = '';
-    items.forEach(item => {
-      const el = createCheckItem(item.text, item.badge, item.checked);
-      setupDrag(el);
-      container.appendChild(el);
-    });
+    items.forEach(item => { const el = createCheckItem(item.text, item.badge, item.checked); setupDrag(el); container.appendChild(el); });
   };
   if (state.done) restoreList('list-done', state.done);
   if (state.todo) restoreList('list-todo', state.todo);
@@ -561,51 +522,31 @@ async function saveChecklist() {
   if (!isLoggedIn || !accessToken) return;
   setSyncStatus('💾 A guardar...', true);
   const content = JSON.stringify(getChecklistState());
-  const blob = new Blob([content], { type: 'application/json' });
-
   try {
     if (checklistFileId) {
-      // Update existing
       await fetch(`https://www.googleapis.com/upload/drive/v3/files/${checklistFileId}?uploadType=media`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
         body: content
       });
     } else {
-      // Create new
       const meta = { name: CHECKLIST_FILE, parents: [FOLDER_ID] };
       const form = new FormData();
       form.append('metadata', new Blob([JSON.stringify(meta)], { type: 'application/json' }));
-      form.append('file', blob);
+      form.append('file', new Blob([content], { type: 'application/json' }));
       const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${accessToken}` },
-        body: form
+        method: 'POST', headers: { Authorization: `Bearer ${accessToken}` }, body: form
       });
       const data = await res.json();
       checklistFileId = data.id;
     }
     setSyncStatus('✓ Guardado', false);
-  } catch(e) {
-    setSyncStatus('Erro ao guardar', false);
-  }
+  } catch(e) { setSyncStatus('Erro ao guardar', false); }
 }
 
-function scheduleSave() {
-  if (!isLoggedIn) return;
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveChecklist, 1500);
-}
+function scheduleSave() { if (!isLoggedIn) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveChecklist, 1500); }
+function setSyncStatus(msg, saving) { const el = document.getElementById('sync-status'); if (el) { el.textContent = msg; el.style.color = saving ? 'var(--accent2)' : 'var(--muted)'; } }
 
-function setSyncStatus(msg, saving) {
-  const el = document.getElementById('sync-status');
-  if (el) {
-    el.textContent = msg;
-    el.style.color = saving ? 'var(--accent2)' : 'var(--muted)';
-  }
-}
-
-// ─── CHECKLIST UI ────────────────────────────────────
 function createCheckItem(text, badgeClass, checked) {
   const labels = {'badge-done':'feito','badge-todo':'urgente','badge-pending':'pendente'};
   const el = document.createElement('div');
@@ -615,33 +556,17 @@ function createCheckItem(text, badgeClass, checked) {
   return el;
 }
 
-function toggleCheck(item) {
-  item.classList.toggle('checked');
-  item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
-  scheduleSave();
-}
-
-function deleteItem(btn) {
-  btn.closest('.check-item').remove();
-  scheduleSave();
-}
-
+function toggleCheck(item) { item.classList.toggle('checked'); item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : ''; scheduleSave(); }
+function deleteItem(btn) { btn.closest('.check-item').remove(); scheduleSave(); }
 function addItem(listId, inputId, selectId) {
-  const input = document.getElementById(inputId);
-  const select = document.getElementById(selectId);
-  const text = input.value.trim();
-  if (!text) return;
+  const input = document.getElementById(inputId), select = document.getElementById(selectId);
+  const text = input.value.trim(); if (!text) return;
   const badgeClass = select.value;
-  const isChecked = badgeClass === 'badge-done';
-  const item = createCheckItem(text, badgeClass, isChecked);
-  setupDrag(item);
-  document.getElementById(listId).appendChild(item);
-  input.value = '';
-  input.focus();
-  scheduleSave();
+  const item = createCheckItem(text, badgeClass, badgeClass === 'badge-done');
+  setupDrag(item); document.getElementById(listId).appendChild(item);
+  input.value = ''; input.focus(); scheduleSave();
 }
 
-// ─── DRAG & DROP ─────────────────────────────────────
 let dragSrc = null;
 function setupDrag(el) {
   el.addEventListener('dragstart', e => { dragSrc = el; el.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
@@ -651,55 +576,34 @@ function setupDrag(el) {
   el.addEventListener('drop', e => {
     e.preventDefault();
     if (dragSrc && el !== dragSrc) {
-      const parent = el.parentNode;
-      const items = [...parent.querySelectorAll('.check-item')];
+      const parent = el.parentNode, items = [...parent.querySelectorAll('.check-item')];
       const si = items.indexOf(dragSrc), ti = items.indexOf(el);
-      if (si < ti) parent.insertBefore(dragSrc, el.nextSibling);
-      else parent.insertBefore(dragSrc, el);
+      if (si < ti) parent.insertBefore(dragSrc, el.nextSibling); else parent.insertBefore(dragSrc, el);
     }
     el.classList.remove('drag-over');
   });
 }
 document.querySelectorAll('.check-item').forEach(setupDrag);
 
-// ─── DOCS ─────────────────────────────────────────────
-function getFileIcon(m) {
-  if (m==='application/pdf') return '📄';
-  if (m.includes('image')) return '🖼️';
-  if (m.includes('word')||m.includes('document')) return '📝';
-  if (m.includes('sheet')||m.includes('excel')) return '📊';
-  return '📎';
-}
-function formatSize(b) {
-  if (!b) return '';
-  if (b<1024) return b+' B';
-  if (b<1024*1024) return (b/1024).toFixed(0)+' KB';
-  return (b/(1024*1024)).toFixed(1)+' MB';
-}
-function formatDate(s) {
-  if (!s) return '';
-  return new Date(s).toLocaleDateString('pt-PT',{day:'2-digit',month:'short',year:'numeric'});
-}
+function getFileIcon(m) { if (m==='application/pdf') return '📄'; if (m.includes('image')) return '🖼️'; if (m.includes('word')||m.includes('document')) return '📝'; if (m.includes('sheet')||m.includes('excel')) return '📊'; return '📎'; }
+function formatSize(b) { if (!b) return ''; if (b<1024) return b+' B'; if (b<1024*1024) return (b/1024).toFixed(0)+' KB'; return (b/(1024*1024)).toFixed(1)+' MB'; }
+function formatDate(s) { if (!s) return ''; return new Date(s).toLocaleDateString('pt-PT',{day:'2-digit',month:'short',year:'numeric'}); }
 
 async function loadDocs() {
   const list = document.getElementById('docs-list');
   list.innerHTML = '<div class="docs-loading">⏳ A carregar...</div>';
   try {
     const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+trashed=false+and+name!='${CHECKLIST_FILE}'&fields=files(id,name,mimeType,size,modifiedTime,webViewLink)&orderBy=name&key=${DRIVE_API_KEY}`;
-    const res = await fetch(url);
-    const data = await res.json();
+    const res = await fetch(url), data = await res.json();
     if (data.error) { list.innerHTML = `<div class="docs-error">⚠️ ${data.error.message}</div>`; return; }
     if (!data.files||data.files.length===0) {
       list.innerHTML = `<div class="docs-empty"><div class="docs-empty-icon">📂</div><div class="docs-empty-text">Pasta vazia — adiciona os teus documentos!</div><a class="docs-upload-btn" href="https://drive.google.com/drive/folders/${FOLDER_ID}" target="_blank">Abrir Drive</a></div>`;
       return;
     }
     list.innerHTML = data.files.map(f=>`<a class="doc-item" href="${f.webViewLink}" target="_blank"><div class="doc-icon">${getFileIcon(f.mimeType)}</div><div class="doc-info"><div class="doc-name">${f.name}</div><div class="doc-meta">${formatDate(f.modifiedTime)}${f.size?' · '+formatSize(parseInt(f.size)):''}</div></div><div class="doc-open">→</div></a>`).join('');
-  } catch(e) {
-    list.innerHTML = `<div class="docs-error">⚠️ ${e.message}</div>`;
-  }
+  } catch(e) { list.innerHTML = `<div class="docs-error">⚠️ ${e.message}</div>`; }
 }
 
-// ─── NAVIGATION ───────────────────────────────────────
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -710,18 +614,11 @@ function showSection(id) {
 
 function toggleDay(card) { card.classList.toggle('open'); }
 
-// ─── INIT ─────────────────────────────────────────────
 window.addEventListener('load', () => {
-  // Show login prompt in checklist if not logged in
   document.getElementById('checklist-login-prompt').style.display = 'block';
   document.getElementById('checklist-content').style.opacity = '0.6';
-
-  // Init Google auth when library loads
   const checkGapi = setInterval(() => {
-    if (window.google && window.google.accounts) {
-      clearInterval(checkGapi);
-      initGoogleAuth();
-    }
+    if (window.google && window.google.accounts) { clearInterval(checkGapi); initGoogleAuth(); }
   }, 200);
 });
 </script>
