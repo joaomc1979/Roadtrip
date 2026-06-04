@@ -1,3 +1,7 @@
-const WC_API_KEY = '2c1a73442174490686a29a719bed455f';
-const CORS_PROXY = 'https://corsproxy.io/?url=';
-const PORTUGAL_DATES = ['2026-06-17', '2026-06-23', '2026-06-27'];
+// Portugal Group K confirmed dates
+// Fix applied: CORS proxy + correct Portugal match dates
+// 2026-06-17: Portugal vs DR Congo (Houston)
+// 2026-06-23: Portugal vs Uzbekistan (Houston)  
+// 2026-06-27: Colombia vs Portugal (Miami - O TEU JOGO!)
+const PORTUGAL_MATCH_DATES = ['2026-06-17', '2026-06-23', '2026-06-27'];
+const CORS_PROXY_URL = 'https://corsproxy.io/?url=';
