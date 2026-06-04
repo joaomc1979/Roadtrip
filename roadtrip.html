@@ -14,10 +14,28 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
 
+  /* LOGIN SCREEN */
+  #login-screen {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 1000; padding: 32px;
+  }
+  .login-logo { font-family: 'Bebas Neue', cursive; font-size: 48px; letter-spacing: 4px; color: var(--accent); margin-bottom: 4px; }
+  .login-logo span { color: var(--text); }
+  .login-sub { color: var(--muted); font-size: 14px; margin-bottom: 48px; letter-spacing: 1px; }
+  .login-flag { font-size: 40px; margin-bottom: 16px; }
+  .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px; width: 100%; max-width: 340px; text-align: center; }
+  .login-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .login-desc { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+  .google-btn { background: white; color: #333; border: none; border-radius: 10px; padding: 14px 24px; font-size: 15px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center; transition: opacity 0.2s; }
+  .google-btn:hover { opacity: 0.9; }
+  .google-icon { width: 20px; height: 20px; }
+
+  /* MAIN APP */
+  #app { display: none; }
   header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 16px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 56px; }
   .logo { font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 2px; color: var(--accent); }
   .logo span { color: var(--text); }
-
   .auth-btn { display: flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; cursor: pointer; font-size: 12px; color: var(--text); font-family: 'DM Sans', sans-serif; }
   .auth-btn:hover { border-color: var(--accent); }
   .auth-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -32,17 +50,52 @@
   .section { display: none; }
   .section.active { display: block; }
 
-  .overview-hero { background: linear-gradient(135deg, #1a0a05 0%, #1e1408 50%, #0a1018 100%); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; position: relative; overflow: hidden; }
-  .overview-hero::before { content: '🇺🇸'; font-size: 80px; position: absolute; right: -10px; top: -10px; opacity: 0.15; }
-  .hero-title { font-family: 'Bebas Neue', cursive; font-size: 36px; letter-spacing: 3px; line-height: 1; margin-bottom: 8px; }
-  .hero-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
-  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .stat { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px; text-align: center; }
-  .stat-num { font-family: 'Bebas Neue', cursive; font-size: 28px; color: var(--accent); line-height: 1; }
-  .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  /* DASHBOARD */
+  .countdown-card {
+    background: linear-gradient(135deg, #1a0a05 0%, #1e1408 50%, #0a1018 100%);
+    border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 12px;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .countdown-card::before { content: '🇺🇸'; font-size: 100px; position: absolute; right: -15px; top: -15px; opacity: 0.1; }
+  .countdown-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; }
+  .countdown-nums { display: flex; justify-content: center; gap: 16px; margin-bottom: 8px; }
+  .cd-unit { text-align: center; }
+  .cd-num { font-family: 'Bebas Neue', cursive; font-size: 52px; color: var(--accent); line-height: 1; }
+  .cd-sep { font-family: 'Bebas Neue', cursive; font-size: 52px; color: var(--border); line-height: 1; }
+  .cd-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .countdown-date { font-size: 13px; color: var(--muted); }
 
+  .today-card { background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+  .today-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .today-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 600; }
+  .today-badge { background: var(--accent); color: white; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 8px; }
+  .today-city { font-family: 'Bebas Neue', cursive; font-size: 28px; letter-spacing: 2px; margin-bottom: 4px; }
+  .today-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .today-next { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+  .today-next strong { color: var(--text); }
+
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+
+  .weather-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .tool-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 10px; font-weight: 600; }
+  .weather-main { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .weather-temp { font-family: 'Bebas Neue', cursive; font-size: 36px; color: var(--text); line-height: 1; }
+  .weather-icon { font-size: 28px; }
+  .weather-desc { font-size: 12px; color: var(--muted); }
+  .weather-city { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+
+  .currency-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .currency-input-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .currency-flag { font-size: 18px; flex-shrink: 0; }
+  .currency-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text); font-size: 16px; font-family: 'DM Mono', monospace; font-weight: 600; outline: none; width: 100%; }
+  .currency-input:focus { border-color: var(--accent); }
+  .currency-label { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+  .currency-rate { font-size: 10px; color: var(--muted); margin-top: 4px; text-align: center; }
+  .currency-divider { text-align: center; color: var(--muted); font-size: 16px; margin: 2px 0; }
+
+  /* CHECKLIST */
   .checklist-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-  .checklist-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .checklist-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
   .check-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); position: relative; border-radius: 6px; user-select: none; }
   .check-item:last-child { border-bottom: none; }
   .check-item.dragging { opacity: 0.4; background: var(--surface2); }
@@ -66,13 +119,12 @@
   .badge-select { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; color: var(--text); font-size: 12px; outline: none; cursor: pointer; }
   .add-btn { background: var(--accent); border: none; border-radius: 8px; color: white; font-size: 20px; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-  .login-prompt { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 12px; }
-  .login-prompt-icon { font-size: 36px; margin-bottom: 12px; }
-  .login-prompt-text { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
-  .login-prompt-btn { background: white; color: #333; border: none; border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-
   .maps-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--blue); text-decoration: none; margin-top: 6px; padding: 3px 8px; background: rgba(52,152,219,0.1); border-radius: 6px; font-weight: 500; }
   .maps-link:hover { background: rgba(52,152,219,0.2); }
+
+  /* DISTANCE BADGE */
+  .distance-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; margin: 4px 0 4px 44px; background: var(--surface2); border-radius: 20px; font-size: 11px; color: var(--muted); width: fit-content; }
+  .distance-badge span { color: var(--accent2); font-weight: 600; font-family: 'DM Mono', monospace; }
 
   .flight-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
   .flight-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
@@ -152,64 +204,105 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">ROAD<span>TRIP</span> 26</div>
-  <button class="auth-btn" id="auth-btn" onclick="handleAuth()">
-    <span id="auth-label">🔐 Login</span>
-  </button>
-</header>
-
-<div class="tabs">
-  <div class="tab active" onclick="showSection('overview')">Resumo</div>
-  <div class="tab" onclick="showSection('checklist')">Checklist</div>
-  <div class="tab" onclick="showSection('ida')">🚗 Ida</div>
-  <div class="tab" onclick="showSection('regresso')">🔄 Regresso</div>
-  <div class="tab" onclick="showSection('hoteis')">🏨 Hotéis</div>
-  <div class="tab" onclick="showSection('voo')">✈️ Voos</div>
-  <div class="tab" onclick="showSection('docs')">📄 Docs</div>
-  <div class="tab" onclick="showSection('dicas')">💡 Dicas</div>
-</div>
-
-<!-- OVERVIEW -->
-<div class="content section active" id="overview">
-  <div class="overview-hero">
-    <div class="hero-title">EAST COAST<br>ROAD TRIP</div>
-    <div class="hero-sub">24 Junho — 4 Julho 2026 · 11 dias</div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Dias ida</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Dias volta</div></div>
-      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Cidades</div></div>
-    </div>
-  </div>
-  <div class="section-label">Rota completa</div>
-  <div class="info-box">
-    <div class="info-row"><span class="info-row-label">🛫 Partida Lisboa</span><span class="info-row-value">24 Jun · UA943</span></div>
-    <div class="info-row"><span class="info-row-label">🌴 Noite 1</span><span class="info-row-value">Asheville, NC</span></div>
-    <div class="info-row"><span class="info-row-label">🌶️ Noite 2</span><span class="info-row-value">Savannah, GA</span></div>
-    <div class="info-row"><span class="info-row-label">🌴 Chegada Miami</span><span class="info-row-value">26 Jun</span></div>
-    <div class="info-row"><span class="info-row-label">⚽ Jogo Portugal</span><span class="info-row-value">27 Jun · 19h30</span></div>
-    <div class="info-row"><span class="info-row-label">🚗 Regresso começa</span><span class="info-row-value">30 Jun</span></div>
-    <div class="info-row"><span class="info-row-label">🦁 Saint Augustine</span><span class="info-row-value">30 Jun</span></div>
-    <div class="info-row"><span class="info-row-label">🍗 Savannah</span><span class="info-row-value">1 Jul · almoço</span></div>
-    <div class="info-row"><span class="info-row-label">🌲 Southern Pines</span><span class="info-row-value">1 Jul · noite</span></div>
-    <div class="info-row"><span class="info-row-label">🏛️ Washington DC</span><span class="info-row-value">2-4 Jul</span></div>
-    <div class="info-row"><span class="info-row-label">🎆 4 de Julho 250º</span><span class="info-row-value">4 Jul · dia inteiro</span></div>
-    <div class="info-row"><span class="info-row-label">🛬 Regresso Lisboa</span><span class="info-row-value">4 Jul · 22h30</span></div>
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-flag">🇵🇹 ✈️ 🇺🇸</div>
+  <div class="login-logo">ROAD<span>TRIP</span></div>
+  <div class="login-sub">Lisboa → Miami → Lisboa · Junho 2026</div>
+  <div class="login-card">
+    <div class="login-title">Bem-vindo de volta</div>
+    <div class="login-desc">Faz login para aceder ao teu itinerário, checklist e documentos.</div>
+    <button class="google-btn" onclick="handleLogin()">
+      <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Entrar com Google
+    </button>
   </div>
 </div>
 
-<!-- CHECKLIST -->
-<div class="content section" id="checklist">
-  <div id="checklist-login-prompt" style="display:none">
-    <div class="login-prompt">
-      <div class="login-prompt-icon">🔐</div>
-      <div class="login-prompt-text">Faz login para guardar a checklist na cloud e aceder em qualquer dispositivo.</div>
-      <button class="login-prompt-btn" onclick="handleAuth()">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Entrar com Google
-      </button>
-    </div>
+<!-- MAIN APP -->
+<div id="app">
+  <header>
+    <div class="logo">ROAD<span>TRIP</span> 26</div>
+    <button class="auth-btn" id="auth-btn" onclick="handleLogout()">
+      <span id="auth-label">...</span>
+    </button>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showSection('dashboard')">🏠 Hoje</div>
+    <div class="tab" onclick="showSection('checklist')">Checklist</div>
+    <div class="tab" onclick="showSection('ida')">🚗 Ida</div>
+    <div class="tab" onclick="showSection('regresso')">🔄 Regresso</div>
+    <div class="tab" onclick="showSection('hoteis')">🏨 Hotéis</div>
+    <div class="tab" onclick="showSection('voo')">✈️ Voos</div>
+    <div class="tab" onclick="showSection('docs')">📄 Docs</div>
+    <div class="tab" onclick="showSection('dicas')">💡 Dicas</div>
   </div>
-  <div id="checklist-content">
+
+  <!-- DASHBOARD -->
+  <div class="content section active" id="dashboard">
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-card" id="countdown-card">
+      <div class="countdown-label">Faltam para a partida</div>
+      <div class="countdown-nums">
+        <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">dias</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">horas</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">min</div></div>
+      </div>
+      <div class="countdown-date">✈️ 24 de Junho 2026 · Lisboa → Washington</div>
+    </div>
+
+    <!-- TODAY -->
+    <div class="today-card" id="today-card" style="display:none">
+      <div class="today-header">
+        <div class="today-title">📍 Estás aqui</div>
+        <div class="today-badge" id="today-day-badge">Dia --</div>
+      </div>
+      <div class="today-city" id="today-city">--</div>
+      <div class="today-desc" id="today-desc">--</div>
+      <div class="today-next" id="today-next"></div>
+    </div>
+
+    <!-- WEATHER + CURRENCY -->
+    <div class="tools-grid">
+      <div class="weather-card">
+        <div class="tool-label">🌤️ Météo</div>
+        <div class="weather-city" id="weather-city">--</div>
+        <div class="weather-main">
+          <div class="weather-icon" id="weather-icon">⏳</div>
+          <div class="weather-temp" id="weather-temp">--</div>
+        </div>
+        <div class="weather-desc" id="weather-desc">A carregar...</div>
+      </div>
+
+      <div class="currency-card">
+        <div class="tool-label">💱 Câmbio</div>
+        <div class="currency-input-row">
+          <div class="currency-flag">🇪🇺</div>
+          <div style="flex:1">
+            <div class="currency-label">EUR</div>
+            <input class="currency-input" id="eur-input" type="number" value="100" oninput="convertCurrency('eur')">
+          </div>
+        </div>
+        <div class="currency-divider">⇅</div>
+        <div class="currency-input-row">
+          <div class="currency-flag">🇺🇸</div>
+          <div style="flex:1">
+            <div class="currency-label">USD</div>
+            <input class="currency-input" id="usd-input" type="number" value="--" oninput="convertCurrency('usd')">
+          </div>
+        </div>
+        <div class="currency-rate" id="exchange-rate">A carregar taxa...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="content section" id="checklist">
     <div class="section-label" style="display:flex;justify-content:space-between;align-items:center">
       <span>Antes de partir</span>
       <span id="sync-status" style="font-size:11px;color:var(--muted)"></span>
@@ -251,181 +344,205 @@
       </div>
     </div>
   </div>
-</div>
 
-<!-- IDA -->
-<div class="content section" id="ida">
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">01</div><div class="day-info"><div class="day-date">Terça, 24 Junho</div><div class="day-route">Washington → Asheville</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">~15h15</div><div class="stop-name">Washington Dulles (IAD)</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport" target="_blank">📍 Google Maps</a><div class="stop-note">Terminal 2 · Gate C8 · Bagagem carrossel 15<br>Submeter MPC, ativar eSIM Visible, Hertz Gold lot</div></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🧇</div><div class="stop-body"><div class="stop-time">~19h00</div><div class="stop-name">Waffle House — Harrisonburg, VA</div><a class="maps-link" href="https://maps.google.com/?cid=185268957087936747" target="_blank">📍 Google Maps</a><div class="stop-note">Paragem para jantar na I-81. Aberto 24h.</div><span class="stop-tag tag-bbq">I-81 Sul</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~22h30</div><div class="stop-name">GLo Hotel — Asheville, NC</div><a class="maps-link" href="https://maps.google.com/?q=509+Tunnel+Rd+Asheville+NC" target="_blank">📍 Google Maps</a><div class="stop-note">509 Tunnel Rd · Pequeno-almoço incluído</div><span class="stop-tag tag-hotel">Hotel noite 1</span></div></div>
+  <!-- IDA -->
+  <div class="content section" id="ida">
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">01</div><div class="day-info"><div class="day-date">Terça, 24 Junho</div><div class="day-route">Washington → Asheville</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">~15h15</div><div class="stop-name">Washington Dulles (IAD)</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport" target="_blank">📍 Google Maps</a><div class="stop-note">Terminal 2 · Gate C8 · Bagagem carrossel 15<br>Submeter MPC, ativar eSIM Visible, Hertz Gold lot</div></div></div>
+        <div class="distance-badge">🚗 <span>280 km</span> · ~2h45 até Harrisonburg</div>
+        <div class="stop"><div class="stop-icon icon-food">🧇</div><div class="stop-body"><div class="stop-time">~19h00</div><div class="stop-name">Waffle House — Harrisonburg, VA</div><a class="maps-link" href="https://maps.google.com/?cid=185268957087936747" target="_blank">📍 Google Maps</a><div class="stop-note">Paragem para jantar na I-81. Aberto 24h.</div><span class="stop-tag tag-bbq">I-81 Sul</span></div></div>
+        <div class="distance-badge">🚗 <span>240 km</span> · ~2h30 até Asheville</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~22h30</div><div class="stop-name">GLo Hotel — Asheville, NC</div><a class="maps-link" href="https://maps.google.com/?q=509+Tunnel+Rd+Asheville+NC" target="_blank">📍 Google Maps</a><div class="stop-note">509 Tunnel Rd · Pequeno-almoço incluído</div><span class="stop-tag tag-hotel">Hotel noite 1</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">02</div><div class="day-info"><div class="day-date">Quarta, 25 Junho</div><div class="day-route">Asheville → Savannah</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-sight">🏔️</div><div class="stop-body"><div class="stop-time">9h00 — 10h30</div><div class="stop-name">Blue Ridge Parkway — Craggy Gardens</div><a class="maps-link" href="https://maps.google.com/?cid=4797346618900825965" target="_blank">📍 Google Maps</a><div class="stop-note">Troço para norte. Miradouros espetaculares em junho. Meia-volta e desce para I-26 Este.</div><span class="stop-tag tag-scenic">Paisagem</span></div></div>
+        <div class="distance-badge">🚗 <span>185 km</span> · ~2h até Fort Mill</div>
+        <div class="stop"><div class="stop-icon icon-food">🌶️</div><div class="stop-body"><div class="stop-time">~13h00</div><div class="stop-name">PuckerButt Pepper Co — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=2874347944587106438" target="_blank">📍 Google Maps</a><div class="stop-note">Casa do Carolina Reaper! Provar tudo de graça. Abre 11h-18h.</div><span class="stop-tag tag-hot">🔥 Chili Head</span></div></div>
+        <div class="distance-badge">🚗 <span>5 min</span> a pé / carro</div>
+        <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~14h30</div><div class="stop-name">Blue Bar & Smokehouse — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=7120205965848807323" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do PuckerButt. Ribs, brisket. ⭐ 4.5</div><span class="stop-tag tag-bbq">BBQ</span></div></div>
+        <div class="distance-badge">🚗 <span>340 km</span> · ~3h30 até Savannah</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Aloft Savannah Downtown</div><a class="maps-link" href="https://maps.google.com/?q=512+W+Oglethorpe+Ave+Savannah+GA" target="_blank">📍 Google Maps</a><div class="stop-note">512 W Oglethorpe Ave · Check-in e deixar as malas</div><span class="stop-tag tag-hotel">Hotel noite 2</span></div></div>
+        <div class="distance-badge">🚶 <span>5 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. ⭐ 4.5</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
+        <div class="distance-badge">🚶 <span>8 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Jazz'd Tapas Bar</div><a class="maps-link" href="https://maps.google.com/?cid=10116845647888913240" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo às quintas. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">03</div><div class="day-info"><div class="day-date">Quinta, 26 Junho</div><div class="day-route">Savannah → Miami</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~12h30</div><div class="stop-name">The Bearded Pig (ou Butt Hutt) — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=7854807827091398398" target="_blank">📍 Bearded Pig</a> <a class="maps-link" href="https://maps.google.com/?q=Butt+Hutt+Smokehouse+Jacksonville+FL" target="_blank">📍 Butt Hutt</a><div class="stop-note">Bearded Pig ⭐ 4.6 · Butt Hutt ⭐ 4.7 — ~260 km de Savannah (~2h30)</div><span class="stop-tag tag-bbq">BBQ Almoço</span></div></div>
+        <div class="distance-badge">🚗 <span>5 min</span> carro</div>
+        <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Tiger Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=11044747376207017387" target="_blank">📍 Google Maps</a><div class="stop-note">Vinil curado. Abre até 20h. ⭐ 4.8</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
+        <div class="distance-badge">🚗 <span>5 min</span> carro</div>
+        <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h50</div><div class="stop-name">Yesterday & Today Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=18184179004031297593" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do Tiger. Fecha 18h (fecha segundas). ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
+        <div class="distance-badge">🚗 <span>530 km</span> · ~5h até Miami</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🌴</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Treehouse Hotel — Miami</div><a class="maps-link" href="https://maps.google.com/?cid=6912079015637896163" target="_blank">📍 Google Maps</a><div class="stop-note">7126 Biscayne Blvd · Amanhã é dia de jogo! 🇵🇹⚽</div><span class="stop-tag tag-hotel">Miami até 30 Jun</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">⚽</div><div class="day-info"><div class="day-date">Sexta, 27 Junho</div><div class="day-route">Jogo Portugal vs Colômbia</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴 · ~30 km do Treehouse (~30 min) · Autocarros gratuitos com bilhete.</div><span class="stop-tag tag-hot">FIFA WC 2026 🔥</span></div></div>
+      </div>
     </div>
   </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">02</div><div class="day-info"><div class="day-date">Quarta, 25 Junho</div><div class="day-route">Asheville → Savannah</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏔️</div><div class="stop-body"><div class="stop-time">9h00 — 10h30</div><div class="stop-name">Blue Ridge Parkway — Craggy Gardens</div><a class="maps-link" href="https://maps.google.com/?cid=4797346618900825965" target="_blank">📍 Google Maps</a><div class="stop-note">Troço cónico para norte. Miradouros espetaculares em junho.</div><span class="stop-tag tag-scenic">Paisagem</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🌶️</div><div class="stop-body"><div class="stop-time">~13h00</div><div class="stop-name">PuckerButt Pepper Co — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=2874347944587106438" target="_blank">📍 Google Maps</a><div class="stop-note">Casa do Carolina Reaper! Provar tudo de graça. Abre 11h-18h.</div><span class="stop-tag tag-hot">🔥 Chili Head</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~14h30</div><div class="stop-name">Blue Bar & Smokehouse — Fort Mill, SC</div><a class="maps-link" href="https://maps.google.com/?cid=7120205965848807323" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do PuckerButt. Ribs, brisket, smoked wings. ⭐ 4.5</div><span class="stop-tag tag-bbq">BBQ</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~19h30 — se der</div><div class="stop-name">Rody's Records — Savannah, GA</div><a class="maps-link" href="https://maps.google.com/?cid=14266658907859923401" target="_blank">📍 Google Maps</a><div class="stop-note">Plano B — só se chegares antes das 19h. ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🏨</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Aloft Savannah Downtown</div><a class="maps-link" href="https://maps.google.com/?q=512+W+Oglethorpe+Ave+Savannah+GA" target="_blank">📍 Google Maps</a><div class="stop-note">512 W Oglethorpe Ave · Check-in e deixar as malas</div><span class="stop-tag tag-hotel">Hotel noite 2</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🦐</div><div class="stop-body"><div class="stop-time">~20h30</div><div class="stop-name">Savannah Seafood Shack</div><a class="maps-link" href="https://maps.google.com/?cid=5325290341509953770" target="_blank">📍 Google Maps</a><div class="stop-note">Low Country Boil autêntico. ⭐ 4.5</div><span class="stop-tag tag-bbq">Low Country</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Jazz'd Tapas Bar</div><a class="maps-link" href="https://maps.google.com/?cid=10116845647888913240" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo às quintas. Abre às 16h. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
-    </div>
-  </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">03</div><div class="day-info"><div class="day-date">Quinta, 26 Junho</div><div class="day-route">Savannah → Miami</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~12h30</div><div class="stop-name">The Bearded Pig (ou Butt Hutt) — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=7854807827091398398" target="_blank">📍 Bearded Pig</a> <a class="maps-link" href="https://maps.google.com/?q=Butt+Hutt+Smokehouse+Jacksonville+FL" target="_blank">📍 Butt Hutt</a><div class="stop-note">Bearded Pig ⭐ 4.6 · Butt Hutt ⭐ 4.7 · Decides no dia!</div><span class="stop-tag tag-bbq">BBQ Almoço</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Tiger Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=11044747376207017387" target="_blank">📍 Google Maps</a><div class="stop-note">Vinil curado de qualidade. Abre até 20h. ⭐ 4.8</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
-      <div class="stop"><div class="stop-icon icon-shop">🎵</div><div class="stop-body"><div class="stop-time">~14h50</div><div class="stop-name">Yesterday & Today Records — Jacksonville</div><a class="maps-link" href="https://maps.google.com/?cid=18184179004031297593" target="_blank">📍 Google Maps</a><div class="stop-note">A 5 min do Tiger. Fecha 18h (fecha segundas). ⭐ 4.6</div><span class="stop-tag tag-vinyl">Vinil</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🌴</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Treehouse Hotel — Miami</div><a class="maps-link" href="https://maps.google.com/?cid=6912079015637896163" target="_blank">📍 Google Maps</a><div class="stop-note">7126 Biscayne Blvd · Amanhã é dia de jogo! 🇵🇹⚽</div><span class="stop-tag tag-hotel">Miami até 30 Jun</span></div></div>
-    </div>
-  </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">⚽</div><div class="day-info"><div class="day-date">Sexta, 27 Junho</div><div class="day-route">Jogo Portugal vs Colômbia</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴 · Autocarros gratuitos com bilhete.</div><span class="stop-tag tag-hot">FIFA WC 2026 🔥</span></div></div>
-    </div>
-  </div>
-</div>
 
-<!-- REGRESSO -->
-<div class="content section" id="regresso">
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">R1</div><div class="day-info"><div class="day-date">Segunda, 30 Junho</div><div class="day-route">Miami → Saint Augustine</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~11h00</div><div class="stop-name">Saída Miami — Treehouse Hotel</div><div class="stop-note">Hora a confirmar conforme despedida do grupo. I-95 Norte direto.</div></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">Caminho — em aberto</div><div class="stop-name">Paragem BBQ no caminho</div><div class="stop-note">• Tropical Smokehouse Delray ⭐ 4.8<br>• Smoke BBQ Fort Lauderdale ⭐ 4.5<br>• Mississippi Sweets Boca Raton ⭐ 4.5</div><span class="stop-tag tag-aberto">Em aberto</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~17h30</div><div class="stop-name">Villa 1565 — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=3365190361966199704" target="_blank">📍 Google Maps</a><div class="stop-note">137 San Marco Ave · 2 piscinas · Buffet incluído · Árvore 650 anos!</div><span class="stop-tag tag-hotel">Hotel noite R1</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🚶</div><div class="stop-body"><div class="stop-time">~18h30</div><div class="stop-name">Centro Histórico de Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?q=St+George+Street+Saint+Augustine+FL+32084" target="_blank">📍 Google Maps</a><div class="stop-note">A cidade mais antiga dos EUA (1565). Tudo a pé do hotel.</div><span class="stop-tag tag-scenic">Historic District</span></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~20h00</div><div class="stop-name">Brisky's BBQ — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=7230512102769115016" target="_blank">📍 Google Maps</a><div class="stop-note">Datil Brisket Bowl — especialidade local! ⭐ 4.8 · Fecha às 19h!</div><span class="stop-tag tag-bbq">BBQ Local</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. Humidor, craft beer. ⭐ 4.6</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+  <!-- REGRESSO -->
+  <div class="content section" id="regresso">
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">R1</div><div class="day-info"><div class="day-date">Segunda, 30 Junho</div><div class="day-route">Miami → Saint Augustine</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~11h00</div><div class="stop-name">Saída Miami — Treehouse Hotel</div><div class="stop-note">I-95 Norte direto. Hora a confirmar com o grupo.</div></div></div>
+        <div class="distance-badge">🚗 <span>~100 km</span> · Delray/Ft. Lauderdale/Boca Raton</div>
+        <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">Caminho — em aberto</div><div class="stop-name">Paragem BBQ no caminho</div><div class="stop-note">• Tropical Smokehouse Delray ⭐ 4.8<br>• Smoke BBQ Fort Lauderdale ⭐ 4.5<br>• Mississippi Sweets Boca Raton ⭐ 4.5</div><span class="stop-tag tag-aberto">Em aberto</span></div></div>
+        <div class="distance-badge">🚗 <span>420 km</span> · ~4h até Saint Augustine</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~17h30</div><div class="stop-name">Villa 1565 — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=3365190361966199704" target="_blank">📍 Google Maps</a><div class="stop-note">137 San Marco Ave · 2 piscinas · Buffet incluído · Árvore 650 anos!</div><span class="stop-tag tag-hotel">Hotel noite R1</span></div></div>
+        <div class="distance-badge">🚶 <span>10 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-sight">🚶</div><div class="stop-body"><div class="stop-time">~18h30</div><div class="stop-name">Centro Histórico de Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?q=St+George+Street+Saint+Augustine+FL+32084" target="_blank">📍 Google Maps</a><div class="stop-note">A cidade mais antiga dos EUA (1565).</div><span class="stop-tag tag-scenic">Historic District</span></div></div>
+        <div class="distance-badge">🚗 <span>5 min</span> carro</div>
+        <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~20h00</div><div class="stop-name">Brisky's BBQ — Saint Augustine</div><a class="maps-link" href="https://maps.google.com/?cid=7230512102769115016" target="_blank">📍 Google Maps</a><div class="stop-note">Datil Brisket Bowl! ⭐ 4.8 · Fecha às 19h — chega cedo!</div><span class="stop-tag tag-bbq">BBQ Local</span></div></div>
+        <div class="distance-badge">🚶 <span>3 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~22h00</div><div class="stop-name">Stogies Jazz Club & Listening</div><a class="maps-link" href="https://maps.google.com/?cid=3315083814086473193" target="_blank">📍 Google Maps</a><div class="stop-note">Jazz ao vivo. ⭐ 4.6 · 36 Charlotte St</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">R2</div><div class="day-info"><div class="day-date">Terça, 1 Julho</div><div class="day-route">Saint Augustine → Southern Pines</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-sight">🏊</div><div class="stop-body"><div class="stop-time">Manhã</div><div class="stop-name">Piscina + Pequeno-almoço — Villa 1565</div><div class="stop-note">Check-out ~10h30.</div></div></div>
+        <div class="distance-badge">🚗 <span>260 km</span> · ~2h30 até Savannah</div>
+        <div class="stop"><div class="stop-icon icon-food">🍗</div><div class="stop-body"><div class="stop-time">~13h30</div><div class="stop-name">Mrs. Wilkes' Dining Room — Savannah</div><a class="maps-link" href="https://maps.google.com/?cid=13458310307102477254" target="_blank">📍 Google Maps</a><div class="stop-note">Mesas comunitárias, fried chicken lendário. Abre 11h-14h SEG-SEX. CHEGA CEDO! ⭐ 4.8</div><span class="stop-tag tag-bbq">Southern Food 🔥</span></div></div>
+        <div class="distance-badge">🚗 <span>430 km</span> · ~4h até Southern Pines</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🌲</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Econo Lodge & Suites — Southern Pines</div><a class="maps-link" href="https://maps.google.com/?cid=17401510954950662698" target="_blank">📍 Google Maps</a><div class="stop-note">408 W Morganton Rd · Noite de descanso.</div><span class="stop-tag tag-hotel">Hotel noite R2</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">R3</div><div class="day-info"><div class="day-date">Quarta, 2 Julho</div><div class="day-route">Southern Pines → Washington</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="distance-badge">🚗 <span>210 km</span> · ~2h até Richmond</div>
+        <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~11h30 — Richmond</div><div class="stop-name">Almoço em Richmond, VA</div><a class="maps-link" href="https://maps.google.com/?cid=14167451885031456101" target="_blank">📍 ZZQ BBQ</a> <a class="maps-link" href="https://maps.google.com/?q=Mama+J%27s+Richmond+VA" target="_blank">📍 Mama J's</a> <a class="maps-link" href="https://maps.google.com/?q=New+York+Deli+2920+W+Cary+St+Richmond+VA" target="_blank">📍 NY Deli</a><div class="stop-note">• ZZQ Texas Craft BBQ ⭐ 4.7 · • Buz and Ned's ⭐ 4.3 · • Mama J's · • Urban Farmhouse · • New York Deli (1929)</div><span class="stop-tag tag-aberto">5 opções</span></div></div>
+        <div class="distance-badge">🚗 <span>165 km</span> · ~1h45 até Dulles</div>
+        <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Hertz — Dulles Airport (IAD)</div><a class="maps-link" href="https://maps.google.com/?q=Hertz+Car+Rental+Washington+Dulles+Airport" target="_blank">📍 Google Maps</a><div class="stop-note">Entregar carro até 17h30. Hertz Gold lot.</div><span class="stop-tag tag-hot">Deadline 17h30!</span></div></div>
+        <div class="distance-badge">🚌 <span>~20 min</span> shuttle hotel</div>
+        <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Courtyard by Marriott — Dulles Airport</div><a class="maps-link" href="https://maps.google.com/?cid=10869374656729656441" target="_blank">📍 Google Maps</a><div class="stop-note">13715 Sayward Blvd, Herndon. Check-in e metro para Washington.</div><span class="stop-tag tag-hotel">Hotel até 4 Jul</span></div></div>
+        <div class="distance-badge">🚇 <span>~50 min</span> metro Silver Line</div>
+        <div class="stop"><div class="stop-icon icon-sight">🏛️</div><div class="stop-body"><div class="stop-time">~16h00</div><div class="stop-name">National Mall — Monumentos</div><a class="maps-link" href="https://maps.google.com/?q=Lincoln+Memorial+Washington+DC" target="_blank">📍 Lincoln Memorial</a> <a class="maps-link" href="https://maps.google.com/?q=Washington+Monument+Washington+DC" target="_blank">📍 Washington Monument</a><div class="stop-note">Tarde a pé: Lincoln Memorial · Washington Monument · Vietnam Veterans Memorial · Capitol</div><span class="stop-tag tag-scenic">Grátis</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">R4</div><div class="day-info"><div class="day-date">Quinta, 3 Julho</div><div class="day-route">Washington — Turismo + Véspera 4 Jul</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-sight">🚀</div><div class="stop-body"><div class="stop-time">10h00</div><div class="stop-name">National Air & Space Museum</div><a class="maps-link" href="https://maps.google.com/?cid=17935525282803673115" target="_blank">📍 Google Maps</a><div class="stop-note">Reservar timed-entry pass! Apollo 11, Wright Brothers. Gratuito. ⭐ 4.6</div><span class="stop-tag tag-museum">Ciência</span></div></div>
+        <div class="distance-badge">🚶 <span>10 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-sight">🎨</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Hirshhorn Museum — Arte Contemporânea</div><a class="maps-link" href="https://maps.google.com/?cid=3820288075105990041" target="_blank">📍 Google Maps</a><div class="stop-note">Picasso, Pollock, Banksy. Gratuito. ⭐ 4.5</div><span class="stop-tag tag-museum">Arte Contemporânea</span></div></div>
+        <div class="distance-badge">🚶 <span>5 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~17h00</div><div class="stop-name">Jazz no Sculpture Garden — National Gallery</div><a class="maps-link" href="https://maps.google.com/?q=National+Gallery+of+Art+Sculpture+Garden+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Todas as sextas-feiras! Gratuito ao ar livre.</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
+        <div class="distance-badge">🚶 <span>15 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-music">🎶</div><div class="stop-body"><div class="stop-time">21h00</div><div class="stop-name">"A Capital Fourth" — Concerto no Capitólio</div><a class="maps-link" href="https://maps.google.com/?q=US+Capitol+West+Lawn+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Concerto gratuito. Acesso abre 15h. Véspera do 250º Independence Day! 🇺🇸</div><span class="stop-tag tag-scenic">Gratuito 🎆</span></div></div>
+      </div>
+    </div>
+    <div class="day-card" onclick="toggleDay(this)">
+      <div class="day-header"><div class="day-num">🎆</div><div class="day-info"><div class="day-date">Sexta, 4 Julho</div><div class="day-route">Independence Day 250º → Lisboa</div></div><div class="day-arrow">▼</div></div>
+      <div class="day-stops">
+        <div class="stop"><div class="stop-icon icon-sight">📜</div><div class="stop-body"><div class="stop-time">9h30</div><div class="stop-name">National Archives — Declaração de Independência</div><a class="maps-link" href="https://maps.google.com/?q=National+Archives+700+Pennsylvania+Ave+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Leitura da Declaração às 10h. 250º aniversário. Chega CEDO!</div><span class="stop-tag tag-scenic">Histórico</span></div></div>
+        <div class="distance-badge">🚶 <span>10 min</span> a pé</div>
+        <div class="stop"><div class="stop-icon icon-sight">🥁</div><div class="stop-body"><div class="stop-time">11h45</div><div class="stop-name">Desfile Independence Day — Constitution Ave</div><a class="maps-link" href="https://maps.google.com/?q=Constitution+Avenue+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">O maior desfile de sempre! 50 estados, bandas, flyovers. 🇺🇸</div><span class="stop-tag tag-hot">America 250!</span></div></div>
+        <div class="distance-badge">🚇 <span>~50 min</span> metro · sair às 18h!</div>
+        <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">22h30</div><div class="stop-name">Voo para Lisboa — Washington Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Google Maps</a><div class="stop-note">Check-in ~20h. TSA = ~45 min. Boa viagem! 🇵🇹</div><span class="stop-tag tag-hotel">Regresso Lisboa</span></div></div>
+      </div>
     </div>
   </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">R2</div><div class="day-info"><div class="day-date">Terça, 1 Julho</div><div class="day-route">Saint Augustine → Southern Pines</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🏊</div><div class="stop-body"><div class="stop-time">Manhã</div><div class="stop-name">Piscina + Pequeno-almoço — Villa 1565</div><div class="stop-note">2 piscinas e buffet incluído. Check-out ~10h30.</div></div></div>
-      <div class="stop"><div class="stop-icon icon-food">🍗</div><div class="stop-body"><div class="stop-time">~13h30</div><div class="stop-name">Mrs. Wilkes' Dining Room — Savannah</div><a class="maps-link" href="https://maps.google.com/?cid=13458310307102477254" target="_blank">📍 Google Maps</a><div class="stop-note">Mesas comunitárias, fried chicken lendário. Abre 11h-14h SEG-SEX. CHEGA CEDO! ⭐ 4.8</div><span class="stop-tag tag-bbq">Southern Food 🔥</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🌲</div><div class="stop-body"><div class="stop-time">~19h30</div><div class="stop-name">Econo Lodge & Suites — Southern Pines</div><a class="maps-link" href="https://maps.google.com/?cid=17401510954950662698" target="_blank">📍 Google Maps</a><div class="stop-note">408 W Morganton Rd · Pequeno-almoço incluído.</div><span class="stop-tag tag-hotel">Hotel noite R2</span></div></div>
-    </div>
-  </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">R3</div><div class="day-info"><div class="day-date">Quarta, 2 Julho</div><div class="day-route">Southern Pines → Washington</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-food">🍖</div><div class="stop-body"><div class="stop-time">~11h30 — Richmond</div><div class="stop-name">Almoço em Richmond, VA</div><a class="maps-link" href="https://maps.google.com/?cid=14167451885031456101" target="_blank">📍 ZZQ BBQ</a> <a class="maps-link" href="https://maps.google.com/?q=Mama+J%27s+Richmond+VA" target="_blank">📍 Mama J's</a> <a class="maps-link" href="https://maps.google.com/?q=New+York+Deli+2920+W+Cary+St+Richmond+VA" target="_blank">📍 NY Deli</a><div class="stop-note">• ZZQ Texas Craft BBQ ⭐ 4.7 · • Buz and Ned's ⭐ 4.3 · • Mama J's · • Urban Farmhouse · • New York Deli (1929)</div><span class="stop-tag tag-aberto">5 opções</span></div></div>
-      <div class="stop"><div class="stop-icon icon-car">🚗</div><div class="stop-body"><div class="stop-time">~14h00</div><div class="stop-name">Hertz — Dulles Airport (IAD)</div><a class="maps-link" href="https://maps.google.com/?q=Hertz+Car+Rental+Washington+Dulles+Airport" target="_blank">📍 Google Maps</a><div class="stop-note">Entregar carro até 17h30. Hertz Gold lot.</div><span class="stop-tag tag-hot">Deadline 17h30!</span></div></div>
-      <div class="stop"><div class="stop-icon icon-hotel">🏛️</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Courtyard by Marriott — Dulles Airport</div><a class="maps-link" href="https://maps.google.com/?cid=10869374656729656441" target="_blank">📍 Google Maps</a><div class="stop-note">13715 Sayward Blvd, Herndon. Check-in e metro para Washington.</div><span class="stop-tag tag-hotel">Hotel até 4 Jul</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🏛️</div><div class="stop-body"><div class="stop-time">~16h00</div><div class="stop-name">National Mall — Monumentos</div><a class="maps-link" href="https://maps.google.com/?q=Lincoln+Memorial+Washington+DC" target="_blank">📍 Lincoln Memorial</a> <a class="maps-link" href="https://maps.google.com/?q=Washington+Monument+Washington+DC" target="_blank">📍 Washington Monument</a><div class="stop-note">Tarde a pé: Lincoln Memorial · Washington Monument · Vietnam Veterans Memorial · Capitol</div><span class="stop-tag tag-scenic">Grátis</span></div></div>
-    </div>
-  </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">R4</div><div class="day-info"><div class="day-date">Quinta, 3 Julho</div><div class="day-route">Washington — Turismo + Véspera 4 Jul</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">🚀</div><div class="stop-body"><div class="stop-time">10h00</div><div class="stop-name">National Air & Space Museum</div><a class="maps-link" href="https://maps.google.com/?cid=17935525282803673115" target="_blank">📍 Google Maps</a><div class="stop-note">Reservar timed-entry pass! Apollo 11, Wright Brothers. Gratuito. ⭐ 4.6</div><span class="stop-tag tag-museum">Ciência</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🎨</div><div class="stop-body"><div class="stop-time">~15h00</div><div class="stop-name">Hirshhorn Museum — Arte Contemporânea</div><a class="maps-link" href="https://maps.google.com/?cid=3820288075105990041" target="_blank">📍 Google Maps</a><div class="stop-note">Picasso, Pollock, Banksy. Gratuito. ⭐ 4.5</div><span class="stop-tag tag-museum">Arte Contemporânea</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎷</div><div class="stop-body"><div class="stop-time">~17h00</div><div class="stop-name">Jazz no Sculpture Garden — National Gallery</div><a class="maps-link" href="https://maps.google.com/?q=National+Gallery+of+Art+Sculpture+Garden+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Todas as sextas-feiras! Jazz ao vivo junto à fonte. Gratuito.</div><span class="stop-tag tag-jazz">Jazz ao vivo</span></div></div>
-      <div class="stop"><div class="stop-icon icon-music">🎶</div><div class="stop-body"><div class="stop-time">21h00</div><div class="stop-name">"A Capital Fourth" — Concerto no Capitólio</div><a class="maps-link" href="https://maps.google.com/?q=US+Capitol+West+Lawn+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Concerto gratuito. Acesso abre 15h. Véspera do 250º Independence Day! 🇺🇸</div><span class="stop-tag tag-scenic">Gratuito 🎆</span></div></div>
-    </div>
-  </div>
-  <div class="day-card" onclick="toggleDay(this)">
-    <div class="day-header"><div class="day-num">🎆</div><div class="day-info"><div class="day-date">Sexta, 4 Julho</div><div class="day-route">Independence Day 250º → Lisboa</div></div><div class="day-arrow">▼</div></div>
-    <div class="day-stops">
-      <div class="stop"><div class="stop-icon icon-sight">📜</div><div class="stop-body"><div class="stop-time">9h30</div><div class="stop-name">National Archives — Declaração de Independência</div><a class="maps-link" href="https://maps.google.com/?q=National+Archives+700+Pennsylvania+Ave+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">Leitura da Declaração às 10h. 250º aniversário. Chega CEDO!</div><span class="stop-tag tag-scenic">Histórico</span></div></div>
-      <div class="stop"><div class="stop-icon icon-sight">🥁</div><div class="stop-body"><div class="stop-time">11h45</div><div class="stop-name">Desfile Independence Day — Constitution Ave</div><a class="maps-link" href="https://maps.google.com/?q=Constitution+Avenue+NW+Washington+DC" target="_blank">📍 Google Maps</a><div class="stop-note">O maior desfile de sempre! 50 estados, bandas, flyovers. 🇺🇸</div><span class="stop-tag tag-hot">America 250!</span></div></div>
-      <div class="stop"><div class="stop-icon icon-car">🚇</div><div class="stop-body"><div class="stop-time">~18h00</div><div class="stop-name">Metro para Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Dulles Airport</a><div class="stop-note">Espera 45 min nas estações. Sai cedo!</div><span class="stop-tag tag-hot">⚠️ Sai cedo!</span></div></div>
-      <div class="stop"><div class="stop-icon icon-plane">✈️</div><div class="stop-body"><div class="stop-time">22h30</div><div class="stop-name">Voo para Lisboa — Washington Dulles</div><a class="maps-link" href="https://maps.google.com/?q=Washington+Dulles+International+Airport+IAD" target="_blank">📍 Google Maps</a><div class="stop-note">Check-in ~20h. TSA = ~45 min. Boa viagem! 🇵🇹</div><span class="stop-tag tag-hotel">Regresso Lisboa</span></div></div>
-    </div>
-  </div>
-</div>
 
-<!-- HOTÉIS -->
-<div class="content section" id="hoteis">
-  <div class="section-label">Ida</div>
-  <div class="hotels-list">
-    <div class="hotel-item"><div class="hotel-emoji">🏨</div><div class="hotel-info"><div class="hotel-name">GLo Hotel</div><div class="hotel-city">Asheville, NC — Noite 1</div><div class="hotel-addr">509 Tunnel Rd, Asheville, NC 28805</div></div><div class="hotel-nights">24 Jun</div></div>
-    <div class="hotel-item"><div class="hotel-emoji">🏙️</div><div class="hotel-info"><div class="hotel-name">Aloft Savannah Downtown</div><div class="hotel-city">Savannah, GA — Noite 2</div><div class="hotel-addr">512 W Oglethorpe Ave, Savannah, GA 31401</div></div><div class="hotel-nights">25 Jun</div></div>
-    <div class="hotel-item"><div class="hotel-emoji">🌴</div><div class="hotel-info"><div class="hotel-name">Treehouse Hotel</div><div class="hotel-city">Miami, FL — 4 noites</div><div class="hotel-addr">7126 Biscayne Blvd, Miami, FL 33138</div></div><div class="hotel-nights">26-29 Jun</div></div>
-  </div>
-  <div class="section-label">Regresso</div>
-  <div class="hotels-list">
-    <div class="hotel-item"><div class="hotel-emoji">🏛️</div><div class="hotel-info"><div class="hotel-name">Villa 1565</div><div class="hotel-city">Saint Augustine, FL — Noite R1</div><div class="hotel-addr">137 San Marco Ave, St. Augustine, FL 32084</div></div><div class="hotel-nights">30 Jun</div></div>
-    <div class="hotel-item"><div class="hotel-emoji">🌲</div><div class="hotel-info"><div class="hotel-name">Econo Lodge & Suites</div><div class="hotel-city">Southern Pines, NC — Noite R2</div><div class="hotel-addr">408 W Morganton Rd, Southern Pines, NC 28387</div></div><div class="hotel-nights">1 Jul</div></div>
-    <div class="hotel-item"><div class="hotel-emoji">🏛️</div><div class="hotel-info"><div class="hotel-name">Courtyard by Marriott Dulles Airport</div><div class="hotel-city">Herndon, VA — 2 noites</div><div class="hotel-addr">13715 Sayward Blvd, Herndon, VA 20171</div></div><div class="hotel-nights">2-3 Jul</div></div>
-  </div>
-</div>
-
-<!-- VOOS -->
-<div class="content section" id="voo">
-  <div class="flight-card">
-    <div class="flight-header"><div class="flight-num">UA943</div><span class="stop-tag tag-scenic">IDA</span></div>
-    <div class="flight-route"><div><div class="airport-code">LIS</div><div style="font-size:11px;color:var(--muted)">Lisboa</div></div><div class="flight-line"></div><div style="text-align:right"><div class="airport-code">IAD</div><div style="font-size:11px;color:var(--muted)">Washington</div></div></div>
-    <div class="flight-details">
-      <div class="flight-detail"><div class="detail-label">Data</div><div class="detail-value">24 Jun 2026</div></div>
-      <div class="flight-detail"><div class="detail-label">Chegada</div><div class="detail-value">~15h15</div></div>
-      <div class="flight-detail"><div class="detail-label">Terminal</div><div class="detail-value">Terminal 2</div></div>
-      <div class="flight-detail"><div class="detail-label">Gate / Bag</div><div class="detail-value">C8 / C.15</div></div>
+  <!-- HOTÉIS -->
+  <div class="content section" id="hoteis">
+    <div class="section-label">Ida</div>
+    <div class="hotels-list">
+      <div class="hotel-item"><div class="hotel-emoji">🏨</div><div class="hotel-info"><div class="hotel-name">GLo Hotel</div><div class="hotel-city">Asheville, NC — Noite 1</div><div class="hotel-addr">509 Tunnel Rd, Asheville, NC 28805</div></div><div class="hotel-nights">24 Jun</div></div>
+      <div class="hotel-item"><div class="hotel-emoji">🏙️</div><div class="hotel-info"><div class="hotel-name">Aloft Savannah Downtown</div><div class="hotel-city">Savannah, GA — Noite 2</div><div class="hotel-addr">512 W Oglethorpe Ave, Savannah, GA 31401</div></div><div class="hotel-nights">25 Jun</div></div>
+      <div class="hotel-item"><div class="hotel-emoji">🌴</div><div class="hotel-info"><div class="hotel-name">Treehouse Hotel</div><div class="hotel-city">Miami, FL — 4 noites</div><div class="hotel-addr">7126 Biscayne Blvd, Miami, FL 33138</div></div><div class="hotel-nights">26-29 Jun</div></div>
+    </div>
+    <div class="section-label">Regresso</div>
+    <div class="hotels-list">
+      <div class="hotel-item"><div class="hotel-emoji">🏛️</div><div class="hotel-info"><div class="hotel-name">Villa 1565</div><div class="hotel-city">Saint Augustine, FL — Noite R1</div><div class="hotel-addr">137 San Marco Ave, St. Augustine, FL 32084</div></div><div class="hotel-nights">30 Jun</div></div>
+      <div class="hotel-item"><div class="hotel-emoji">🌲</div><div class="hotel-info"><div class="hotel-name">Econo Lodge & Suites</div><div class="hotel-city">Southern Pines, NC — Noite R2</div><div class="hotel-addr">408 W Morganton Rd, Southern Pines, NC 28387</div></div><div class="hotel-nights">1 Jul</div></div>
+      <div class="hotel-item"><div class="hotel-emoji">🏛️</div><div class="hotel-info"><div class="hotel-name">Courtyard by Marriott Dulles Airport</div><div class="hotel-city">Herndon, VA — 2 noites</div><div class="hotel-addr">13715 Sayward Blvd, Herndon, VA 20171</div></div><div class="hotel-nights">2-3 Jul</div></div>
     </div>
   </div>
-  <div class="tip-card"><div class="tip-title">📱 Ao aterrar</div><div class="tip-text">1. Liga eSIM Visible 2. Abre MPC, tira selfie e submete (Terminal 2) 3. Fila MPC 4. Bagagem carrossel 15 5. Hertz Gold lot — sem counter.</div></div>
-  <div class="flight-card">
-    <div class="flight-header"><div class="flight-num">Regresso</div><span class="stop-tag tag-bbq">VOLTA</span></div>
-    <div class="flight-route"><div><div class="airport-code">IAD</div><div style="font-size:11px;color:var(--muted)">Washington</div></div><div class="flight-line"></div><div style="text-align:right"><div class="airport-code">LIS</div><div style="font-size:11px;color:var(--muted)">Lisboa</div></div></div>
-    <div class="flight-details">
-      <div class="flight-detail"><div class="detail-label">Data</div><div class="detail-value">4 Jul 2026</div></div>
-      <div class="flight-detail"><div class="detail-label">Partida</div><div class="detail-value">22h30</div></div>
-      <div class="flight-detail"><div class="detail-label">Check-in</div><div class="detail-value">~20h00</div></div>
-      <div class="flight-detail"><div class="detail-label">Sair DC</div><div class="detail-value">~18h00</div></div>
+
+  <!-- VOOS -->
+  <div class="content section" id="voo">
+    <div class="flight-card">
+      <div class="flight-header"><div class="flight-num">UA943</div><span class="stop-tag tag-scenic">IDA</span></div>
+      <div class="flight-route"><div><div class="airport-code">LIS</div><div style="font-size:11px;color:var(--muted)">Lisboa</div></div><div class="flight-line"></div><div style="text-align:right"><div class="airport-code">IAD</div><div style="font-size:11px;color:var(--muted)">Washington</div></div></div>
+      <div class="flight-details">
+        <div class="flight-detail"><div class="detail-label">Data</div><div class="detail-value">24 Jun 2026</div></div>
+        <div class="flight-detail"><div class="detail-label">Chegada</div><div class="detail-value">~15h15</div></div>
+        <div class="flight-detail"><div class="detail-label">Terminal</div><div class="detail-value">Terminal 2</div></div>
+        <div class="flight-detail"><div class="detail-label">Gate / Bag</div><div class="detail-value">C8 / C.15</div></div>
+      </div>
     </div>
-  </div>
-  <div class="tip-card"><div class="tip-title">⚠️ Dia 4 Jul — Multidões</div><div class="tip-text">250º aniversário dos EUA. Metro lotado, esperas de 45 min. Não tentes conduzir. Sai do centro às 18h.</div></div>
-</div>
-
-<!-- DOCUMENTOS -->
-<div class="content section" id="docs">
-  <div class="docs-header">
-    <div><div class="section-label" style="margin:0 0 4px">📄 Documentos</div><div style="font-size:12px;color:var(--muted)">Pasta Google Drive sincronizada</div></div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="docs-refresh-btn" onclick="loadDocs()">↻</button>
-      <a class="docs-upload-btn" href="https://drive.google.com/drive/folders/18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG" target="_blank">+ Adicionar</a>
+    <div class="tip-card"><div class="tip-title">📱 Ao aterrar</div><div class="tip-text">1. Liga eSIM Visible 2. Abre MPC, tira selfie e submete (Terminal 2) 3. Fila MPC 4. Bagagem carrossel 15 5. Hertz Gold lot — sem counter.</div></div>
+    <div class="flight-card">
+      <div class="flight-header"><div class="flight-num">Regresso</div><span class="stop-tag tag-bbq">VOLTA</span></div>
+      <div class="flight-route"><div><div class="airport-code">IAD</div><div style="font-size:11px;color:var(--muted)">Washington</div></div><div class="flight-line"></div><div style="text-align:right"><div class="airport-code">LIS</div><div style="font-size:11px;color:var(--muted)">Lisboa</div></div></div>
+      <div class="flight-details">
+        <div class="flight-detail"><div class="detail-label">Data</div><div class="detail-value">4 Jul 2026</div></div>
+        <div class="flight-detail"><div class="detail-label">Partida</div><div class="detail-value">22h30</div></div>
+        <div class="flight-detail"><div class="detail-label">Check-in</div><div class="detail-value">~20h00</div></div>
+        <div class="flight-detail"><div class="detail-label">Sair DC</div><div class="detail-value">~18h00</div></div>
+      </div>
     </div>
+    <div class="tip-card"><div class="tip-title">⚠️ Dia 4 Jul — Multidões</div><div class="tip-text">250º aniversário dos EUA. Metro lotado, esperas de 45 min. Não tentes conduzir. Sai do centro às 18h.</div></div>
   </div>
-  <div id="docs-list"><div class="docs-loading">A carregar...</div></div>
-</div>
 
-<!-- DICAS -->
-<div class="content section" id="dicas">
-  <div class="section-label">Conectividade</div>
-  <div class="info-box">
-    <div class="info-box-header"><div class="info-box-icon">📱</div><div class="info-box-title">eSIM Visible (Verizon)</div></div>
-    <div class="info-row"><span class="info-row-label">Rede</span><span class="info-row-value">Verizon 5G</span></div>
-    <div class="info-row"><span class="info-row-label">Duração</span><span class="info-row-value">14 dias</span></div>
-    <div class="info-row"><span class="info-row-label">Dados</span><span class="info-row-value">Unlimited (2GB/dia 5G, depois 3G)</span></div>
-    <div class="info-row"><span class="info-row-label">Chamadas</span><span class="info-row-value">Unlimited USA + 180 min intl</span></div>
-    <div class="info-row"><span class="info-row-label">Ativar</span><span class="info-row-value">Ao aterrar em Dulles</span></div>
+  <!-- DOCUMENTOS -->
+  <div class="content section" id="docs">
+    <div class="docs-header">
+      <div><div class="section-label" style="margin:0 0 4px">📄 Documentos</div><div style="font-size:12px;color:var(--muted)">Pasta Google Drive sincronizada</div></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="docs-refresh-btn" onclick="loadDocs()">↻</button>
+        <a class="docs-upload-btn" href="https://drive.google.com/drive/folders/18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG" target="_blank">+ Adicionar</a>
+      </div>
+    </div>
+    <div id="docs-list"><div class="docs-loading">A carregar...</div></div>
   </div>
-  <div class="section-label">Carro</div>
-  <div class="info-box">
-    <div class="info-box-header"><div class="info-box-icon">🚗</div><div class="info-box-title">Hertz Gold — Medium Elite SUV</div></div>
-    <div class="info-row"><span class="info-row-label">Reservado</span><span class="info-row-value">Mercedes GLE "ou similar"</span></div>
-    <div class="info-row"><span class="info-row-label">Provável</span><span class="info-row-value">Cadillac XT5/XT6 ou Chevy</span></div>
-    <div class="info-row"><span class="info-row-label">Pickup</span><span class="info-row-value">IAD — Gold lot (sem counter)</span></div>
-    <div class="info-row"><span class="info-row-label">Devolução</span><span class="info-row-value">2 Jul até 17h30 — IAD</span></div>
-  </div>
-  <div class="section-label">Dicas importantes</div>
-  <div class="tip-card"><div class="tip-title">🌶️ PuckerButt</div><div class="tip-text">Loja do criador do Carolina Reaper. Provar tudo de graça. Não compres o Thermageddon antes de entrar no carro!</div></div>
-  <div class="tip-card"><div class="tip-title">🍗 Mrs. Wilkes</div><div class="tip-text">Só seg-sex 11h-14h. Fila na rua. Chega 30 min antes. Só aceita cash ou Venmo.</div></div>
-  <div class="tip-card"><div class="tip-title">🎵 Vinil</div><div class="tip-text">Tiger Records em Jacksonville tem ótima curadoria indie. Yesterday & Today fecha às segundas.</div></div>
-  <div class="tip-card"><div class="tip-title">🏛️ Air & Space</div><div class="tip-text">Reserva timed-entry pass GRÁTIS em airandspace.si.edu com antecedência.</div></div>
-</div>
 
-<div class="footer">
-  <div class="flag-row">🇵🇹 ✈️ 🇺🇸</div>
-  Washington → Asheville → Savannah → Miami<br>→ Saint Augustine → Southern Pines → Washington<br><br>
-  <strong>24 Junho — 4 Julho 2026</strong>
+  <!-- DICAS -->
+  <div class="content section" id="dicas">
+    <div class="section-label">Conectividade</div>
+    <div class="info-box">
+      <div class="info-box-header"><div class="info-box-icon">📱</div><div class="info-box-title">eSIM Visible (Verizon)</div></div>
+      <div class="info-row"><span class="info-row-label">Rede</span><span class="info-row-value">Verizon 5G</span></div>
+      <div class="info-row"><span class="info-row-label">Duração</span><span class="info-row-value">14 dias</span></div>
+      <div class="info-row"><span class="info-row-label">Dados</span><span class="info-row-value">Unlimited (2GB/dia 5G, depois 3G)</span></div>
+      <div class="info-row"><span class="info-row-label">Chamadas</span><span class="info-row-value">Unlimited USA + 180 min intl</span></div>
+      <div class="info-row"><span class="info-row-label">Ativar</span><span class="info-row-value">Ao aterrar em Dulles</span></div>
+    </div>
+    <div class="section-label">Carro</div>
+    <div class="info-box">
+      <div class="info-box-header"><div class="info-box-icon">🚗</div><div class="info-box-title">Hertz Gold — Medium Elite SUV</div></div>
+      <div class="info-row"><span class="info-row-label">Reservado</span><span class="info-row-value">Mercedes GLE "ou similar"</span></div>
+      <div class="info-row"><span class="info-row-label">Provável</span><span class="info-row-value">Cadillac XT5/XT6 ou Chevy</span></div>
+      <div class="info-row"><span class="info-row-label">Pickup</span><span class="info-row-value">IAD — Gold lot (sem counter)</span></div>
+      <div class="info-row"><span class="info-row-label">Devolução</span><span class="info-row-value">2 Jul até 17h30 — IAD</span></div>
+    </div>
+    <div class="section-label">Dicas importantes</div>
+    <div class="tip-card"><div class="tip-title">🌶️ PuckerButt</div><div class="tip-text">Loja do criador do Carolina Reaper. Provar tudo de graça. Não compres o Thermageddon antes de entrar no carro!</div></div>
+    <div class="tip-card"><div class="tip-title">🍗 Mrs. Wilkes</div><div class="tip-text">Só seg-sex 11h-14h. Fila na rua. Chega 30 min antes. Só aceita cash ou Venmo.</div></div>
+    <div class="tip-card"><div class="tip-title">🎵 Vinil</div><div class="tip-text">Tiger Records em Jacksonville tem ótima curadoria indie. Yesterday & Today fecha às segundas.</div></div>
+    <div class="tip-card"><div class="tip-title">🏛️ Air & Space</div><div class="tip-text">Reserva timed-entry pass GRÁTIS em airandspace.si.edu com antecedência.</div></div>
+  </div>
+
+  <div class="footer">
+    <div class="flag-row">🇵🇹 ✈️ 🇺🇸</div>
+    Washington → Asheville → Savannah → Miami<br>→ Saint Augustine → Southern Pines → Washington<br><br>
+    <strong>24 Junho — 4 Julho 2026</strong>
+  </div>
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async></script>
@@ -436,21 +553,32 @@ const FOLDER_ID = '18m6P4VKPvsznVUaCDv1agC-4kkDKmRxG';
 const CHECKLIST_FILE = 'roadtrip_checklist.json';
 
 let accessToken = null, checklistFileId = null, saveTimer = null, isLoggedIn = false;
+let exchangeRate = null;
 
+// ── TRIP SCHEDULE ──────────────────────────────────────
+const TRIP = [
+  { date: '2026-06-24', day: 'Dia 1', city: 'Washington DC → Asheville', desc: 'Aterragem em Dulles às 15h15. MPC + eSIM + Hertz. Waffle House em Harrisonburg. GLo Hotel em Asheville.', weather: { lat: 38.9531, lon: -77.4565, name: 'Washington Dulles' }, next: 'Amanhã: Blue Ridge Parkway → PuckerButt → Savannah' },
+  { date: '2026-06-25', day: 'Dia 2', city: 'Asheville → Savannah', desc: 'Blue Ridge Parkway de manhã. PuckerButt Pepper Co em Fort Mill. Jantar no Savannah Seafood Shack. Jazz\'d Tapas Bar.', weather: { lat: 32.0835, lon: -81.0998, name: 'Savannah' }, next: 'Amanhã: Jacksonville (BBQ + Vinil) → Miami' },
+  { date: '2026-06-26', day: 'Dia 3', city: 'Savannah → Miami', desc: 'BBQ em Jacksonville (Bearded Pig ou Butt Hutt). Vinil no Tiger Records e Yesterday & Today. Chegada ao Treehouse Hotel em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã: Portugal vs Colômbia! Hard Rock Stadium às 19h30 🇵🇹⚽' },
+  { date: '2026-06-27', day: 'Dia ⚽', city: 'Miami — Jogo Portugal 🇵🇹', desc: 'Portugal vs Colômbia no Hard Rock Stadium às 19h30. Autocarro gratuito com bilhete. FORÇA PORTUGAL! 🔥', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Restam 3 dias de Miami com os amigos' },
+  { date: '2026-06-28', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: '' },
+  { date: '2026-06-29', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã começa o regresso! Miami → Saint Augustine' },
+  { date: '2026-06-30', day: 'Regresso R1', city: 'Miami → Saint Augustine', desc: 'Saída ~11h. BBQ no caminho. Chegada à Villa 1565 em Saint Augustine. Centro histórico e Stogies Jazz Club.', weather: { lat: 29.8943, lon: -81.3145, name: 'Saint Augustine' }, next: 'Amanhã: Mrs. Wilkes\' em Savannah → Southern Pines' },
+  { date: '2026-07-01', day: 'Regresso R2', city: 'Saint Augustine → Southern Pines', desc: 'Manhã de piscina na Villa 1565. Almoço no Mrs. Wilkes\' Dining Room em Savannah (abre 11h-14h, CHEGA CEDO!). Econo Lodge em Southern Pines.', weather: { lat: 35.1726, lon: -79.3994, name: 'Southern Pines' }, next: 'Amanhã: Richmond (almoço) → Entregar carro → Washington' },
+  { date: '2026-07-02', day: 'Regresso R3', city: 'Southern Pines → Washington', desc: 'Almoço em Richmond. Entregar o Hertz em Dulles (deadline 17h30!). Courtyard Marriott. National Mall à tarde.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: Air & Space Museum · Hirshhorn · Jazz · Concerto no Capitólio' },
+  { date: '2026-07-03', day: 'Regresso R4', city: 'Washington — Turismo', desc: 'Air & Space Museum (reservar timed-entry!). Hirshhorn Museum. Jazz no Sculpture Garden. Concerto "A Capital Fourth" no Capitólio.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: 4 de Julho 250º! National Archives → Desfile → Voo 22h30' },
+  { date: '2026-07-04', day: '🎆 4 de Julho', city: 'Washington — Independence Day → Lisboa', desc: 'National Archives às 9h30. Desfile na Constitution Ave às 11h45. Metro para Dulles às 18h (45 min de espera!). Voo UA às 22h30 para Lisboa.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Regresso a Lisboa! ✈️🇵🇹' },
+];
+
+// ── AUTH ──────────────────────────────────────────────
 function initGoogleAuth() {
-  google.accounts.id.initialize({ client_id: CLIENT_ID, callback: () => {}, auto_select: false });
+  if (window.google && window.google.accounts) {
+    google.accounts.id.initialize({ client_id: CLIENT_ID, callback: () => {}, auto_select: false });
+  }
 }
 
-function handleAuth() {
-  if (isLoggedIn) {
-    google.accounts.id.disableAutoSelect();
-    accessToken = null; isLoggedIn = false;
-    document.getElementById('auth-label').innerHTML = '🔐 Login';
-    document.getElementById('checklist-login-prompt').style.display = 'block';
-    document.getElementById('checklist-content').style.opacity = '0.5';
-    document.getElementById('sync-status').textContent = '';
-    return;
-  }
+function handleLogin() {
+  if (!window.google) { setTimeout(handleLogin, 500); return; }
   google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/drive.file',
@@ -467,14 +595,137 @@ function onTokenReceived(resp) {
   }).then(r => r.json()).then(info => {
     const name = info.given_name || info.name || 'João';
     const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-    document.getElementById('auth-label').innerHTML =
-      `<div class="auth-avatar">${initials}</div> ${name}`;
-    document.getElementById('checklist-login-prompt').style.display = 'none';
-    document.getElementById('checklist-content').style.opacity = '1';
+    document.getElementById('auth-label').innerHTML = `<div class="auth-avatar">${initials}</div> ${name}`;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
     loadChecklist();
+    initDashboard();
   });
 }
 
+function handleLogout() {
+  if (!confirm('Terminar sessão?')) return;
+  google.accounts.id.disableAutoSelect();
+  accessToken = null; isLoggedIn = false;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+// ── DASHBOARD ─────────────────────────────────────────
+function initDashboard() {
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+  updateTodayWidget();
+  loadWeather();
+  loadExchangeRate();
+}
+
+function updateCountdown() {
+  const now = new Date();
+  const target = new Date('2026-06-24T09:00:00');
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('countdown-card').innerHTML = '<div class="countdown-label">🛫 A viagem está a acontecer!</div><div style="font-family:\'Bebas Neue\',cursive;font-size:32px;color:var(--accent);text-align:center">SAFE TRAVELS! 🇺🇸</div>';
+    return;
+  }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+  document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+}
+
+function updateTodayWidget() {
+  const today = new Date().toISOString().split('T')[0];
+  const entry = TRIP.find(t => t.date === today);
+  if (!entry) return;
+  document.getElementById('today-card').style.display = 'block';
+  document.getElementById('today-day-badge').textContent = entry.day;
+  document.getElementById('today-city').textContent = entry.city;
+  document.getElementById('today-desc').textContent = entry.desc;
+  if (entry.next) document.getElementById('today-next').innerHTML = `<strong>A seguir:</strong> ${entry.next}`;
+  // Load weather for today's city
+  if (entry.weather) loadWeatherForCity(entry.weather);
+}
+
+async function loadWeather() {
+  // Before/after trip: show Lisbon weather
+  const today = new Date().toISOString().split('T')[0];
+  const entry = TRIP.find(t => t.date === today);
+  if (!entry) {
+    loadWeatherForCity({ lat: 38.7169, lon: -9.1399, name: 'Lisboa' });
+  }
+}
+
+async function loadWeatherForCity(city) {
+  document.getElementById('weather-city').textContent = city.name;
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,weathercode&temperature_unit=celsius`);
+    const data = await res.json();
+    const temp = Math.round(data.current.temperature_2m);
+    const code = data.current.weathercode;
+    const icon = getWeatherIcon(code);
+    const desc = getWeatherDesc(code);
+    document.getElementById('weather-temp').textContent = `${temp}°C`;
+    document.getElementById('weather-icon').textContent = icon;
+    document.getElementById('weather-desc').textContent = desc;
+  } catch(e) {
+    document.getElementById('weather-desc').textContent = 'Sem dados';
+  }
+}
+
+function getWeatherIcon(code) {
+  if (code === 0) return '☀️';
+  if (code <= 2) return '⛅';
+  if (code <= 3) return '☁️';
+  if (code <= 48) return '🌫️';
+  if (code <= 57) return '🌧️';
+  if (code <= 67) return '🌧️';
+  if (code <= 77) return '❄️';
+  if (code <= 82) return '🌦️';
+  if (code <= 86) return '❄️';
+  return '⛈️';
+}
+
+function getWeatherDesc(code) {
+  if (code === 0) return 'Céu limpo';
+  if (code <= 2) return 'Parcialmente nublado';
+  if (code <= 3) return 'Nublado';
+  if (code <= 48) return 'Nevoeiro';
+  if (code <= 57) return 'Chuva leve';
+  if (code <= 67) return 'Chuva';
+  if (code <= 77) return 'Neve';
+  if (code <= 82) return 'Aguaceiros';
+  return 'Trovoada';
+}
+
+async function loadExchangeRate() {
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/EUR');
+    const data = await res.json();
+    exchangeRate = data.rates.USD;
+    document.getElementById('exchange-rate').textContent = `1 EUR = ${exchangeRate.toFixed(4)} USD`;
+    document.getElementById('usd-input').value = (100 * exchangeRate).toFixed(2);
+  } catch(e) {
+    exchangeRate = 1.08;
+    document.getElementById('exchange-rate').textContent = 'Taxa aproximada: 1 EUR ≈ 1.08 USD';
+    document.getElementById('usd-input').value = (100 * exchangeRate).toFixed(2);
+  }
+}
+
+function convertCurrency(from) {
+  if (!exchangeRate) return;
+  if (from === 'eur') {
+    const eur = parseFloat(document.getElementById('eur-input').value) || 0;
+    document.getElementById('usd-input').value = (eur * exchangeRate).toFixed(2);
+  } else {
+    const usd = parseFloat(document.getElementById('usd-input').value) || 0;
+    document.getElementById('eur-input').value = (usd / exchangeRate).toFixed(2);
+  }
+}
+
+// ── CHECKLIST ─────────────────────────────────────────
 async function loadChecklist() {
   setSyncStatus('A carregar...', false);
   try {
@@ -492,9 +743,7 @@ async function loadChecklist() {
       const json = await content.json();
       restoreChecklist(json);
       setSyncStatus('✓ Sincronizado', false);
-    } else {
-      setSyncStatus('Pronto', false);
-    }
+    } else { setSyncStatus('Pronto', false); }
   } catch(e) { setSyncStatus('Erro ao carregar', false); }
 }
 
@@ -585,6 +834,7 @@ function setupDrag(el) {
 }
 document.querySelectorAll('.check-item').forEach(setupDrag);
 
+// ── DOCS ──────────────────────────────────────────────
 function getFileIcon(m) { if (m==='application/pdf') return '📄'; if (m.includes('image')) return '🖼️'; if (m.includes('word')||m.includes('document')) return '📝'; if (m.includes('sheet')||m.includes('excel')) return '📊'; return '📎'; }
 function formatSize(b) { if (!b) return ''; if (b<1024) return b+' B'; if (b<1024*1024) return (b/1024).toFixed(0)+' KB'; return (b/(1024*1024)).toFixed(1)+' MB'; }
 function formatDate(s) { if (!s) return ''; return new Date(s).toLocaleDateString('pt-PT',{day:'2-digit',month:'short',year:'numeric'}); }
@@ -604,6 +854,7 @@ async function loadDocs() {
   } catch(e) { list.innerHTML = `<div class="docs-error">⚠️ ${e.message}</div>`; }
 }
 
+// ── NAVIGATION ────────────────────────────────────────
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -611,12 +862,10 @@ function showSection(id) {
   event.target.classList.add('active');
   if (id==='docs') loadDocs();
 }
-
 function toggleDay(card) { card.classList.toggle('open'); }
 
+// ── INIT ──────────────────────────────────────────────
 window.addEventListener('load', () => {
-  document.getElementById('checklist-login-prompt').style.display = 'block';
-  document.getElementById('checklist-content').style.opacity = '0.6';
   const checkGapi = setInterval(() => {
     if (window.google && window.google.accounts) { clearInterval(checkGapi); initGoogleAuth(); }
   }, 200);
