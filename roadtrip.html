@@ -248,7 +248,7 @@
 <div id="login-screen">
   <div class="login-flag">🇵🇹 ✈️ 🇺🇸</div>
   <div class="login-logo">ROAD<span>TRIP</span></div>
-  <div class="login-sub">Lisboa → Miami → Lisboa · Junho 2026</div>
+  <div class="login-sub">Lisboa → Miami → Lisboa · Junho </div>
   <div class="login-card">
     <div class="login-title">Bem-vindo de volta</div>
     <div class="login-desc">Faz login para aceder ao teu itinerário, checklist e documentos.</div>
@@ -290,7 +290,7 @@
         <div class="cd-sep">:</div>
         <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">min</div></div>
       </div>
-      <div class="countdown-date">✈️ 24 de Junho 2026 · UA943 · Lisboa → Washington</div>
+      <div class="countdown-date">✈️ 24 de Junho  · UA943 · Lisboa → Washington</div>
     </div>
 
     <div class="today-card" id="today-card" style="display:none">
@@ -338,7 +338,7 @@
   <!-- MUNDIAL -->
   <div class="content section" id="mundial">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div class="section-label" style="margin:0">🏆 FIFA World Cup 2026</div>
+      <div class="section-label" style="margin:0">🏆 FIFA World Cup </div>
       <button onclick="loadWCMatches(wcSelectedDate)" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer">↻ Atualizar</button>
     </div>
 
@@ -440,7 +440,7 @@
     <div class="day-card" onclick="toggleDay(this)">
       <div class="day-header"><div class="day-num">⚽</div><div class="day-info"><div class="day-date">Sexta, 27 Junho</div><div class="day-route">Jogo Portugal vs Colômbia</div></div><div class="day-arrow">▼</div></div>
       <div class="day-stops">
-        <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴 · ~30 km do Treehouse (~30 min) · Autocarros gratuitos com bilhete.</div><span class="stop-tag tag-hot">FIFA WC 2026 🔥</span></div></div>
+        <div class="stop"><div class="stop-icon icon-sight">🏟️</div><div class="stop-body"><div class="stop-time">19h30</div><div class="stop-name">Hard Rock Stadium — Miami Gardens</div><a class="maps-link" href="https://maps.google.com/?q=Hard+Rock+Stadium+Miami+Gardens+FL" target="_blank">📍 Google Maps</a><div class="stop-note">Portugal 🇵🇹 vs Colômbia 🇨🇴 · ~30 km do Treehouse (~30 min) · Autocarros gratuitos com bilhete.</div><span class="stop-tag tag-hot">FIFA WC  🔥</span></div></div>
       </div>
     </div>
   </div>
@@ -530,7 +530,7 @@
   <div class="content section" id="voo">
     <!-- UA943 IDA -->
     <div class="flight-card">
-      <div class="flight-header"><div class="flight-num">UA943</div><span class="stop-tag tag-scenic">IDA · 24 Jun 2026</span></div>
+      <div class="flight-header"><div class="flight-num">UA943</div><span class="stop-tag tag-scenic">IDA · 24 Jun </span></div>
       <div class="flight-route">
         <div class="airport-block">
           <div class="airport-code">LIS</div>
@@ -560,7 +560,7 @@
 
     <!-- UA942 REGRESSO -->
     <div class="flight-card">
-      <div class="flight-header"><div class="flight-num">UA942</div><span class="stop-tag tag-bbq">REGRESSO · 4/5 Jul 2026</span></div>
+      <div class="flight-header"><div class="flight-num">UA942</div><span class="stop-tag tag-bbq">REGRESSO · 4/5 Jul </span></div>
       <div class="flight-route">
         <div class="airport-block">
           <div class="airport-code">IAD</div>
@@ -630,7 +630,7 @@
   <div class="footer">
     <div class="flag-row">🇵🇹 ✈️ 🇺🇸</div>
     Washington → Asheville → Savannah → Miami<br>→ Saint Augustine → Southern Pines → Washington<br><br>
-    <strong>24 Junho — 4 Julho 2026</strong>
+    <strong>24 Junho — 4 Julho </strong>
   </div>
 </div>
 
@@ -647,16 +647,16 @@ let exchangeRate = null, wcSelectedDate = null, wcMatchesCache = {};
 
 // ── TRIP SCHEDULE ──────────────────────────────────
 const TRIP = [
-  { date: '2026-06-24', day: 'Dia 1', city: 'Washington DC → Asheville', desc: 'Aterragem em Dulles às 15h25. MPC + eSIM + Hertz. Waffle House em Harrisonburg. GLo Hotel em Asheville.', weather: { lat: 38.9531, lon: -77.4565, name: 'Washington DC' }, next: 'Amanhã: Blue Ridge Parkway → PuckerButt → Savannah' },
-  { date: '2026-06-25', day: 'Dia 2', city: 'Asheville → Savannah', desc: 'Blue Ridge Parkway de manhã. PuckerButt Pepper Co em Fort Mill. Savannah Seafood Shack. Jazz\'d Tapas Bar.', weather: { lat: 32.0835, lon: -81.0998, name: 'Savannah' }, next: 'Amanhã: Jacksonville (BBQ + Vinil) → Miami' },
-  { date: '2026-06-26', day: 'Dia 3', city: 'Savannah → Miami', desc: 'BBQ em Jacksonville. Vinil no Tiger Records e Yesterday & Today. Chegada ao Treehouse Hotel em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã: Portugal vs Colômbia! Hard Rock Stadium 19h30 🇵🇹⚽' },
-  { date: '2026-06-27', day: 'Dia ⚽', city: 'Miami — Jogo Portugal 🇵🇹', desc: 'Portugal vs Colômbia no Hard Rock Stadium às 19h30. Autocarro gratuito. FORÇA PORTUGAL! 🔥', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Restam 3 dias de Miami com os amigos' },
-  { date: '2026-06-28', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: '' },
-  { date: '2026-06-29', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã começa o regresso! Miami → Saint Augustine' },
-  { date: '2026-06-30', day: 'Regresso R1', city: 'Miami → Saint Augustine', desc: 'Saída ~11h. BBQ no caminho. Villa 1565 em Saint Augustine. Centro histórico e Stogies Jazz Club.', weather: { lat: 29.8943, lon: -81.3145, name: 'Saint Augustine' }, next: 'Amanhã: Mrs. Wilkes\' em Savannah → Southern Pines' },
-  { date: '2026-07-01', day: 'Regresso R2', city: 'Saint Augustine → Southern Pines', desc: 'Manhã de piscina na Villa 1565. Mrs. Wilkes\' Dining Room em Savannah (11h-14h, CHEGA CEDO!). Econo Lodge em Southern Pines.', weather: { lat: 35.1726, lon: -79.3994, name: 'Southern Pines' }, next: 'Amanhã: Richmond → Entregar carro → Washington' },
-  { date: '2026-07-02', day: 'Regresso R3', city: 'Southern Pines → Washington', desc: 'Almoço em Richmond. Entregar Hertz em Dulles (deadline 17h30!). Courtyard Marriott. National Mall à tarde.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: Air & Space Museum · Hirshhorn · Jazz · Concerto no Capitólio' },
-  { date: '2026-07-03', day: 'Regresso R4', city: 'Washington — Turismo', desc: 'Air & Space Museum. Hirshhorn Museum. Jazz no Sculpture Garden. Concerto "A Capital Fourth" no Capitólio.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: 4 de Julho 250º! Archives → Desfile → Voo UA942 23h05' },
+  { date: '-06-24', day: 'Dia 1', city: 'Washington DC → Asheville', desc: 'Aterragem em Dulles às 15h25. MPC + eSIM + Hertz. Waffle House em Harrisonburg. GLo Hotel em Asheville.', weather: { lat: 38.9531, lon: -77.4565, name: 'Washington DC' }, next: 'Amanhã: Blue Ridge Parkway → PuckerButt → Savannah' },
+  { date: '-06-25', day: 'Dia 2', city: 'Asheville → Savannah', desc: 'Blue Ridge Parkway de manhã. PuckerButt Pepper Co em Fort Mill. Savannah Seafood Shack. Jazz\'d Tapas Bar.', weather: { lat: 32.0835, lon: -81.0998, name: 'Savannah' }, next: 'Amanhã: Jacksonville (BBQ + Vinil) → Miami' },
+  { date: '-06-26', day: 'Dia 3', city: 'Savannah → Miami', desc: 'BBQ em Jacksonville. Vinil no Tiger Records e Yesterday & Today. Chegada ao Treehouse Hotel em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã: Portugal vs Colômbia! Hard Rock Stadium 19h30 🇵🇹⚽' },
+  { date: '-06-27', day: 'Dia ⚽', city: 'Miami — Jogo Portugal 🇵🇹', desc: 'Portugal vs Colômbia no Hard Rock Stadium às 19h30. Autocarro gratuito. FORÇA PORTUGAL! 🔥', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Restam 3 dias de Miami com os amigos' },
+  { date: '-06-28', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: '' },
+  { date: '-06-29', day: 'Miami', city: 'Miami — Dia livre', desc: 'Tempo livre com os amigos em Miami.', weather: { lat: 25.7617, lon: -80.1918, name: 'Miami' }, next: 'Amanhã começa o regresso! Miami → Saint Augustine' },
+  { date: '-06-30', day: 'Regresso R1', city: 'Miami → Saint Augustine', desc: 'Saída ~11h. BBQ no caminho. Villa 1565 em Saint Augustine. Centro histórico e Stogies Jazz Club.', weather: { lat: 29.8943, lon: -81.3145, name: 'Saint Augustine' }, next: 'Amanhã: Mrs. Wilkes\' em Savannah → Southern Pines' },
+  { date: '-07-01', day: 'Regresso R2', city: 'Saint Augustine → Southern Pines', desc: 'Manhã de piscina na Villa 1565. Mrs. Wilkes\' Dining Room em Savannah (11h-14h, CHEGA CEDO!). Econo Lodge em Southern Pines.', weather: { lat: 35.1726, lon: -79.3994, name: 'Southern Pines' }, next: 'Amanhã: Richmond → Entregar carro → Washington' },
+  { date: '-07-02', day: 'Regresso R3', city: 'Southern Pines → Washington', desc: 'Almoço em Richmond. Entregar Hertz em Dulles (deadline 17h30!). Courtyard Marriott. National Mall à tarde.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: Air & Space Museum · Hirshhorn · Jazz · Concerto no Capitólio' },
+  { date: '-07-03', day: 'Regresso R4', city: 'Washington — Turismo', desc: 'Air & Space Museum. Hirshhorn Museum. Jazz no Sculpture Garden. Concerto "A Capital Fourth" no Capitólio.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Amanhã: 4 de Julho 250º! Archives → Desfile → Voo UA942 23h05' },
   { date: '2026-07-04', day: '🎆 4 de Julho', city: 'Washington — Independence Day → Lisboa', desc: 'National Archives às 9h30. Desfile na Constitution Ave às 11h45. Metro para Dulles às 18h. Voo UA942 às 23h05.', weather: { lat: 38.9072, lon: -77.0369, name: 'Washington DC' }, next: 'Regresso a Lisboa! ✈️🇵🇹' },
 ];
 
@@ -807,12 +807,13 @@ function convertCurrency(from) {
 }
 
 // ── WORLD CUP ─────────────────────────────────────
+const CORS_PROXY = 'https://corsproxy.io/?url=';
 async function fetchWCMatches(dateStr) {
   if (wcMatchesCache[dateStr]) return wcMatchesCache[dateStr];
-  const res = await fetch(
-    `https://api.football-data.org/v4/competitions/WC/matches?dateFrom=${dateStr}&dateTo=${dateStr}`,
-    { headers: { 'X-Auth-Token': WC_API_KEY } }
-  );
+  const apiUrl = `https://api.football-data.org/v4/competitions/WC/matches?dateFrom=${dateStr}&dateTo=${dateStr}`;
+  const res = await fetch(CORS_PROXY + encodeURIComponent(apiUrl), {
+    headers: { 'X-Auth-Token': WC_API_KEY }
+  });
   const data = await res.json();
   wcMatchesCache[dateStr] = data.matches || [];
   return wcMatchesCache[dateStr];
@@ -885,7 +886,7 @@ async function initWCTab() {
     const d = new Date(dateStr + 'T12:00:00Z');
     btn.textContent = d.toLocaleDateString('pt-PT', {day:'numeric', month:'short'});
     // Portugal dates
-    if (['2026-06-23','2026-06-27','2026-07-01','2026-07-04','2026-07-08'].includes(dateStr)) {
+    if (['2026-06-17','2026-06-23','2026-06-27'].includes(dateStr)) {
       btn.classList.add('has-portugal');
       btn.textContent = '🇵🇹 ' + btn.textContent;
     }
@@ -967,7 +968,7 @@ async function loadWCGroups() {
   const container = document.getElementById('wc-groups');
   try {
     const res = await fetch(
-      'https://api.football-data.org/v4/competitions/WC/standings',
+      CORS_PROXY + encodeURIComponent('https://api.football-data.org/v4/competitions/WC/standings'),
       { headers: { 'X-Auth-Token': WC_API_KEY } }
     );
     const data = await res.json();
