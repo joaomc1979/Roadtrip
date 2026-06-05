@@ -815,7 +815,11 @@ async function fetchWCMatches(dateStr) {
     headers: { 'X-Auth-Token': WC_API_KEY }
   });
   const data = await res.json();
-  wcMatchesCache[dateStr] = data.matches || [];
+  wcMatchesCache[dateStr] = (data.matches || []).filter(m => {
+  const d = new Date(m.utcDate);
+  const etDate = d.toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+  return etDate === dateStr;
+});
   return wcMatchesCache[dateStr];
 }
 
