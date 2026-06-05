@@ -822,8 +822,8 @@ const apiUrl = `https://api.football-data.org/v4/competitions/WC/matches?dateFro
   const data = await res.json();
   wcMatchesCache[dateStr] = (data.matches || []).filter(m => {
   const d = new Date(m.utcDate);
-  const etDate = d.toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-  return etDate === dateStr;
+  const etDate = d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+return etDate === dateStr;
 });
   return wcMatchesCache[dateStr];
 }
