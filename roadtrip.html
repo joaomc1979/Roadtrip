@@ -693,7 +693,7 @@ function handleLogin() {
   if (!window.google) { setTimeout(handleLogin, 500); return; }
   google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/drive.file',
+   scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile',
     callback: onTokenReceived
   }).requestAccessToken();
 }
