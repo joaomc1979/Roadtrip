@@ -810,7 +810,10 @@ function convertCurrency(from) {
 const CORS_PROXY = 'https://corsproxy.io/?url=';
 async function fetchWCMatches(dateStr) {
   if (wcMatchesCache[dateStr]) return wcMatchesCache[dateStr];
-  const apiUrl = `https://api.football-data.org/v4/competitions/WC/matches?dateFrom=${dateStr}&dateTo=${dateStr}`;
+ const nextDay = new Date(dateStr + 'T12:00:00Z');
+nextDay.setDate(nextDay.getDate() + 1);
+const nextDayStr = nextDay.toISOString().split('T')[0];
+const apiUrl = `https://api.football-data.org/v4/competitions/WC/matches?dateFrom=${dateStr}&dateTo=${nextDayStr}`;
   const res = await fetch(CORS_PROXY + encodeURIComponent(apiUrl), {
     headers: { 'X-Auth-Token': WC_API_KEY }
   });
